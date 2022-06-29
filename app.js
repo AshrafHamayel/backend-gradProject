@@ -12,10 +12,12 @@ app.use(session);
 
 const login=require('./Pages/login');
 const signUp=require('./Pages/signUp');
+const logout=require('./Pages/logout');
 
 
 app.use('/login',login)
 app.use('/signUp',signUp);
+app.use('/logout',logout);
 
 app.use(authenticate);
 
@@ -30,9 +32,9 @@ app.get('/', (req, res) => {
 
 
 
-app.listen('3000',()=> 
+app.listen('9500',()=> 
 {
-  console.log('server started on port 3000');
+  console.log('server started on port 9500');
 
 });
 

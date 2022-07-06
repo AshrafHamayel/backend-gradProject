@@ -4,7 +4,7 @@ const express = require('express');
 
 const appl=express.Router();
 
-//appl.use(authenticate);///       2
+//appl.use(authenticate);///     2
 
 appl.get('/signUp',(req,res,err)=>{
 

@@ -6,7 +6,8 @@ const appl=express.Router();
 //appl.use(authenticate);///       2
 
 
-appl.get('/login',(req,res)=>{
+appl.get('/login',(req,res)=>
+{
     //var email = "asrf@gmail.com";
 
 
@@ -18,8 +19,7 @@ appl.get('/login',(req,res)=>{
 
  res.json("fome login")
 
-    }
-    );
+    } );
 
 
 module.exports=appl;

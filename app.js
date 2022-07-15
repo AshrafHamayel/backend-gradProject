@@ -3,7 +3,7 @@ const express =require('express');
 const bodyParser=require('body-parser');
 const session = require('./Authentication/session');
 const authenticate = require('./Authentication/authenticate');
-const db = require('./config/database');
+//const db = require('./config/database');
 //const app = express.Router();
 const app=express();
 app.use(bodyParser.json());

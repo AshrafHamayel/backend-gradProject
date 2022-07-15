@@ -15,9 +15,11 @@ appl.get('/login',(req,res)=>{
  //console.log(req.session.user)
  //res.send(result);
 
+
  res.json("fome login")
 
-    });
+    }
+    );
 
 
 module.exports=appl;

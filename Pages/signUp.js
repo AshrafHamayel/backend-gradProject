@@ -35,65 +35,20 @@ function isEmailValid(email) {
 
 //appl.use(authenticate);///     2
 
-appl.post('/signUp', (req, res) => {
+// appl.post('/signUp', (req, res) => {
 
-    var email = req.params['email'];
+//     var email = req.params['email'];
 
-    console.log(email)
+//     console.log(email)
 
-    req.on("data", (data) => {
-        console.log(JSON.parse(data))
-    })
-
-    if (isEmailValid(email)) {
-
-        var name = req.body.name;
-        var pass = req.body.password;
-
-        let newUser = new User(
-            {
-                name: name,
-                email: email,
-                password: pass,
-                image: 'asd.png'
-
-            });
-
-
-        newUser.save((err) => {
-            if (!err) {
-                console.log('done !');
-                res.json({
-                    Message: "Done successfully"
-                })
-            }
-
-            else {
-                console.log('Email exists !');
-
-            }
-
-        })
-
-
-    }
-
-    else {
-        res.send('Invalid Email !');
-
-    }
-
-
-});
-
-// appl.get('/signUp', (req, res) => {
-
-//     var email = req.query.email;
+//     req.on("data", (data) => {
+//         console.log(JSON.parse(data))
+//     })
 
 //     if (isEmailValid(email)) {
 
-//         var name = req.query.name;
-//         var pass = req.query.password;
+//         var name = req.body.name;
+//         var pass = req.body.password;
 
 //         let newUser = new User(
 //             {
@@ -108,6 +63,9 @@ appl.post('/signUp', (req, res) => {
 //         newUser.save((err) => {
 //             if (!err) {
 //                 console.log('done !');
+//                 res.json({
+//                     Message: "Done successfully"
+//                 })
 //             }
 
 //             else {
@@ -127,6 +85,50 @@ appl.post('/signUp', (req, res) => {
 
 
 // });
+
+appl.post('/signUp', (req, res) => {
+
+    var email = req.query.email;
+
+    if (isEmailValid(email)) {
+
+        var name = req.query.name;
+        var pass = req.query.password;
+
+        let newUser = new User(
+            {
+                name: name,
+                email: email,
+                password: pass,
+                image: 'asd.png'
+
+            });
+
+
+        newUser.save((err) => {
+            if (!err) {
+
+                console.log('done !');
+                res.json("done ")
+            }
+
+            else {
+                console.log('Email exists !');
+                res.json('Email exists !')
+            }
+
+        })
+
+
+    }
+
+    else {
+        res.send('Invalid Email !');
+
+    }
+
+
+});
 
 
 module.exports = appl;

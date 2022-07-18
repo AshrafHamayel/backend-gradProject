@@ -32,59 +32,7 @@ function isEmailValid(email) {
     return true;
 }
 
-
-//appl.use(authenticate);///     2
-
-// appl.post('/signUp', (req, res) => {
-
-//     var email = req.params['email'];
-
-//     console.log(email)
-
-//     req.on("data", (data) => {
-//         console.log(JSON.parse(data))
-//     })
-
-//     if (isEmailValid(email)) {
-
-//         var name = req.body.name;
-//         var pass = req.body.password;
-
-//         let newUser = new User(
-//             {
-//                 name: name,
-//                 email: email,
-//                 password: pass,
-//                 image: 'asd.png'
-
-//             });
-
-
-//         newUser.save((err) => {
-//             if (!err) {
-//                 console.log('done !');
-//                 res.json({
-//                     Message: "Done successfully"
-//                 })
-//             }
-
-//             else {
-//                 console.log('Email exists !');
-
-//             }
-
-//         })
-
-
-//     }
-
-//     else {
-//         res.send('Invalid Email !');
-
-//     }
-
-
-// });
+ 
 
 appl.post('/signUp', (req, res) => {
 

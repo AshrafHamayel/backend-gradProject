@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const userSchema = new mongoose.Schema({
+const postsSchema = new mongoose.Schema({
 
     name: {
         type: String,
@@ -14,17 +14,27 @@ const userSchema = new mongoose.Schema({
 
     },
 
-    password: {
+    
+    imageuser: {
         type: String,
-        required: true
-
-    },
-
-    image: {
-        type: String,
-        //required: true,
+        required: true,
         default: 'def.png',
     },
+
+    imagepost: {
+        type: String,
+        required: true,
+        default: 'def.png',
+    },
+
+    date: {
+        type: Date,
+        required: true,
+      
+    },
+
+
+
 
 })
 

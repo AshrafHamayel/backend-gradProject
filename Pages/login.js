@@ -5,17 +5,30 @@ const db = require('../config/database');
 const User = require('../models/user');
 
 const appl = express.Router();
+const  newUser = new User();
 
- 
 
 appl.post('/login', (req, res) => {
 
-    var email = req.query.email;
-    User.find({email:email},(result))
-    res.json(result.name)
+    let email1 = req.query.email;
+    let pass = req.query.password;
+
+
+    console.log(email1 +" --")
+   User.findOne({ email: email1 })
+    .then(newUser => {
+
+      if (!newUser) {
+        console.log('not found');
+
+       
+
+    }
+    else
+    return res.json(newUser.name);
 
 
 });
 
-
+});
 module.exports = appl;

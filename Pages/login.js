@@ -6,14 +6,15 @@ const User = require('../models/user');
 
 const appl = express.Router();
 const  newUser = new User();
-
-
+let E ='asd';
+let  email1;
+const getemail = () => {E};
 appl.post('/login', (req, res) => {
 
-    let email1 = req.query.email;
-    let pass = req.query.password;
+   email1= req.query.email;
+  let  pass  = req.query.password;
 
-
+     //E='email1';
     console.log(email1 +" --")
    User.findOne({ email: email1 })
     .then(newUser => {
@@ -31,4 +32,7 @@ appl.post('/login', (req, res) => {
 });
 
 });
+module.exports = {
+  getemail
+};
 module.exports = appl;

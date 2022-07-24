@@ -3,6 +3,7 @@ const express = require('express');
 //const authenticate = require('../Authentication/authenticate'); /////  1
 const db = require('../config/database');
 const User = require('../models/user');
+const userInfo = require('../models/userInfo');
 
 const appl = express.Router();
 
@@ -56,13 +57,39 @@ appl.post('/signUp', (req, res) => {
         newUser.save((err) => {
             if (!err) {
 
-                console.log('done !');
-                res.json("done ")
+                let UInfo = new userInfo(
+                    {
+                       
+                        email: email,
+                        name: name,
+                        password: pass,
+                        image: 'asd.png',
+                        work :'بدون مهنة',
+                        followers : '00',
+                        Ifollow : '00',
+                        evaluation :'00',
+                        description : 'اضف وصف لعملك'
+
+                    });
+
+                    UInfo.save((err)=>{
+                        if (err)
+                        res.json(err)
+                        else
+                        res.json("done ")
+
+
+                    })
+
+
+
+
+
             }
 
             else {
-                console.log('Email exists !');
-                res.json('Email exists !')
+            
+                res.json('Email exists !'+err)
             }
 
         })

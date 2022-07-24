@@ -23,40 +23,28 @@ const userInfoSchema = new mongoose.Schema({
 
     image: {
         type: String,
-        //required: true,
-        default: 'def.png',
     },
 
     work: {
         type: String,
-        //required: true
-        default:'بدون مهنة',
 
     },
 
     followers: {
-        type: Int32,
-       // required: true,
-        default:00,
+        type: String,
 
     },
 
     Ifollow: {
-        type: Int32,
-       // required: true,
-        default:00,
+        type: String,
     },
 
     evaluation: {
-        type: Int32,
-       // required: true,
-        default:00,
+        type: String,
     },
 
      description: {
         type: String,
-       // required: true,
-        default:'اضف وصف لعملك',
     },
 
 

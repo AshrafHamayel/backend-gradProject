@@ -38,5 +38,5 @@ const postsSchema = new mongoose.Schema({
 
 })
 
-let User = mongoose.model('User', userSchema, 'users');
-module.exports = User;
+let posts = mongoose.model('posts', postsSchema, 'posts');
+module.exports = posts;

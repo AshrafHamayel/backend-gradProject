@@ -35,9 +35,9 @@ app.get('/', (req, res) => {
 
 
 
-app.listen('9500',()=> 
+app.listen('8000',()=> 
 {
-  console.log('server started on port 9500');
+  console.log('server started on port 8000');
 
 });
 

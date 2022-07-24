@@ -76,20 +76,23 @@ appl.post('/signUp', (req, res) => {
                         if (err)
                         res.json(err)
                         else
-                        res.json("done ")
+                        res.json({
+                            NT:'done'
+                        })
+                        console.log("done ");
 
 
                     })
-
-
-
-
 
             }
 
             else {
             
-                res.json('Email exists !'+err)
+                res.json({
+                    NT:'Email exists !'
+                })
+                console.log('Email exists !');
+
             }
 
         })
@@ -98,7 +101,11 @@ appl.post('/signUp', (req, res) => {
     }
 
     else {
-        res.send('Invalid Email !');
+
+        res.json({
+            NT:'Invalid Email !'
+        })
+        console.log('Invalid Email !');
 
     }
 

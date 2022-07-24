@@ -21,13 +21,15 @@ appl.post('/login', (req, res) => {
 
       if (!newUser) {
         console.log('not found');
-
-       
-
+        res.json({
+          NT:'not found'
+      })
     }
     else
-    return res.json(newUser.name);
-    console.log(newUser.name);
+    return  res.json({
+      NT:'.name'
+  })
+    ///console.log(newUser.name);
 
 
 });

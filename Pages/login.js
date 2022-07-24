@@ -27,6 +27,7 @@ appl.post('/login', (req, res) => {
     }
     else
     return res.json(newUser.name);
+    console.log(newUser.name);
 
 
 });

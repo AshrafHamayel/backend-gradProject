@@ -38,11 +38,14 @@ function isEmailValid(email) {
 appl.post('/signUp', (req, res) => {
 
     var email = req.query.email;
+    var name = req.query.name;
+    var pass = req.query.password;
+    var confPassword = req.query.confPassword;
 
     if (isEmailValid(email)) {
 
-        var name = req.query.name;
-        var pass = req.query.password;
+        if(confPassword!=pass){
+       
 
         let newUser = new User(
             {
@@ -76,12 +79,14 @@ appl.post('/signUp', (req, res) => {
                         if (err)
                         res.json(err)
                         else
-                        res.json({
-                            NT:'done'
-                        })
-                        console.log("done ");
-
-
+                        {
+                            res.json({
+                                NT:'done'
+                            })
+                            console.log("done ");
+                        
+                        }
+                       
                     })
 
             }
@@ -97,6 +102,16 @@ appl.post('/signUp', (req, res) => {
 
         })
 
+
+    }
+    else{
+
+        console.log("password does not match"); 
+
+        res.json({
+            NT:'password does not match'
+        })
+    }
 
     }
 

@@ -5,31 +5,43 @@ const db = require('../config/database');
 const User = require('../models/user');
 
 const appl = express.Router();
-const  newUser = new User();
-let E ='asd';
-let  email1;
-const getemail = () => {E};
+
 appl.post('/login', (req, res) => {
-
-   email1= req.query.email;
+  const  oldUser = new User();
+  let email1= req.query.email;
   let  pass  = req.query.password;
-
-     //E='email1';
-    console.log(email1 +" --")
+    console.log(email1 +"--")
    User.findOne({ email: email1 })
-    .then(newUser => {
+    .then(oldUser => {
 
-      if (!newUser) {
+      if (!oldUser) {
         console.log('not found');
         res.json({
           NT:'not found'
       })
     }
     else
-    return  res.json({
-      NT:'.name'
-  })
-    ///console.log(newUser.name);
+{
+if(pass==oldUser.password)
+{
+
+  return  res.json({
+    NT:'done'
+})
+
+}
+else {
+  return  res.json({
+    NT:'The password is incorrect'
+})
+
+
+}
+
+
+
+}
+  
 
 
 });
@@ -37,8 +49,4 @@ appl.post('/login', (req, res) => {
 });
 
 
-
-module.exports = {
-  getemail
-};
 module.exports = appl;

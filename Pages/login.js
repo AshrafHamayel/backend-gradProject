@@ -2,16 +2,16 @@
 const express = require('express');
 //const authenticate = require('../Authentication/authenticate'); /////  1
 const db = require('../config/database');
-const User = require('../models/user');
+const userInfo = require('../models/userInfo');
 
 const appl = express.Router();
 
 appl.post('/login', (req, res) => {
-  const  oldUser = new User();
+  const  oldUser = new userInfo();
   let email1= req.query.email;
   let  pass  = req.query.password;
     console.log(email1 +"--")
-   User.findOne({ email: email1 })
+   userInfo.findOne({ email: email1 })
     .then(oldUser => {
 
       if (!oldUser) {

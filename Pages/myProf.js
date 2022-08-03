@@ -1,7 +1,7 @@
 
 const express = require('express');
 const db = require('../config/database');
-const User = require('../models/user');
+//const User = require('../models/user');
 const posts = require('../models/posts');
 const userInfo = require('../models/userInfo');
 

@@ -4,6 +4,8 @@ const db = require('../config/database');
 //const User = require('../models/user');
 const posts = require('../models/posts');
 const userInfo = require('../models/userInfo');
+const multer = require('multer');
+const upload = multer({dest:'uploads/'});
 
 const appl = express.Router();
 
@@ -90,6 +92,48 @@ appl.post('/editPassword', (req, res) => {
 
 
 });
+
+
+
+appl.post('/saveImage',upload.single('usersImages'), (req, res,next) => {
+  console.log(req.file);
+
+  var emailP= req.query.email;
+  var base64= req.query.base64;
+  var ImageName= req.query.ImageName;
+  var imm= req.query.imm;
+
+
+   console.log(emailP +" --/n")
+   console.log(base64 +" --/n")
+   console.log(ImageName +" --/n")
+   console.log(imm +" --/n")
+
+   userInfo.findOne({ email: emailP })
+   .then(UserInfor => {
+
+     if (!UserInfor) 
+     {
+       console.log('not found');
+
+   }
+   else
+   {
+   //return res.json(UserInfor);
+
+
+   }
+
+
+});
+
+
+  
+
+});
+
+
+
 
 
 module.exports = appl;

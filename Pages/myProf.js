@@ -8,7 +8,9 @@ const multer = require('multer');
 const upload = multer({dest:'uploads/'});
 
 const appl = express.Router();
-
+var uploading = multer({
+  dest: __dirname + '../public/uploads/',
+})
 
 appl.get('/myProf', (req, res) => {
    var emailP= req.query.email;
@@ -95,37 +97,38 @@ appl.post('/editPassword', (req, res) => {
 
 
 
-appl.post('/saveImage',upload.single('usersImages'), (req, res,next) => {
-  console.log(req.file);
+appl.post('/saveImage',(req, res) => {
+  
 
   var emailP= req.query.email;
-  var base64= req.query.base64;
-  var ImageName= req.query.ImageName;
-  var imm= req.query.imm;
+ var imagePath= req.query.imagePath;
 
 
-   console.log(emailP +" --/n")
-   console.log(base64 +" --/n")
-   console.log(ImageName +" --/n")
-   console.log(imm +" --/n")
 
-   userInfo.findOne({ email: emailP })
-   .then(UserInfor => {
+    console.log(emailP +" --ashraf")
 
-     if (!UserInfor) 
-     {
-       console.log('not found');
-
-   }
-   else
-   {
-   //return res.json(UserInfor);
+    console.log(imagePath +" --")
 
 
-   }
+  //  userInfo.findOne({ email: emailP })
+  //  .then(UserInfor => {
+
+  //    if (!UserInfor) 
+  //    {
+  //      console.log('not found');
+
+  //  }
+  //  else
+  //  {
+
+  return res.json({
+    NT:'done'
+        })
+
+  //}
 
 
-});
+// });
 
 
   
@@ -137,3 +140,8 @@ appl.post('/saveImage',upload.single('usersImages'), (req, res,next) => {
 
 
 module.exports = appl;
+
+
+
+
+

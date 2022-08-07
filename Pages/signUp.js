@@ -53,7 +53,7 @@ appl.post('/signUp', (req, res) => {
                     email: email,
                     name: name,
                     password: pass,
-                    image: 'asd.png',
+                    image: 'NoImage.jpg',
                     work :'بدون مهنة',
                     followers : '00',
                     Ifollow : '00',

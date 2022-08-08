@@ -110,24 +110,36 @@ appl.post('/saveImage',(req, res) => {
     console.log(imagePath +" --")
 
 
-  //  userInfo.findOne({ email: emailP })
-  //  .then(UserInfor => {
+  userInfo.findOne({ email: emailP })
+  .then(UserInfor => {
 
-  //    if (!UserInfor) 
-  //    {
-  //      console.log('not found');
+    if (!UserInfor) 
+    {
+      console.log('not found');
+    }
+       else
+       {
+        
+        //   if(NewPass==ConfNewPass){
 
-  //  }
-  //  else
-  //  {
+      
+        userInfo.findOneAndUpdate({ email: emailP }, { image: imagePath },(err) => {
+      if (err) console.log(err);
+      else
+      return  res.json({
+        NT:'done'
+    })
 
-  return res.json({ NT:'done' })
+    })
 
-  //}
+           }
+      
+
+      // }
+        //return res.json(UserInfor);
 
 
-// });
-
+});
 
   
 
@@ -135,8 +147,6 @@ appl.post('/saveImage',(req, res) => {
 
 
 module.exports = appl;
-
-
 
 
 

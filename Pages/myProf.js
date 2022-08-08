@@ -121,9 +121,7 @@ appl.post('/saveImage',(req, res) => {
   //  else
   //  {
 
-  return res.json({
-    NT:'done'
-        })
+  return res.json({ NT:'done' })
 
   //}
 

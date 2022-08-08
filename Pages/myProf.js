@@ -134,9 +134,6 @@ appl.post('/saveImage',(req, res) => {
 });
 
 
-
-
-
 module.exports = appl;
 
 

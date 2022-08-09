@@ -18,13 +18,11 @@ const postsSchema = new mongoose.Schema({
     imageuser: {
         type: String,
         required: true,
-        default: 'def.png',
     },
 
     imagepost: {
         type: String,
         required: true,
-        default: 'def.png',
     },
 
     date: {

@@ -2,7 +2,6 @@
 const express = require('express');
 //const authenticate = require('../Authentication/authenticate'); /////  1
 const db = require('../config/database');
-//const User = require('../models/user');
 const userInfo = require('../models/userInfo');
 
 const appl = express.Router();

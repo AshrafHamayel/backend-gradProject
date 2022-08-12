@@ -58,6 +58,11 @@ const chatsSchema = new mongoose.Schema({
         required: true,
     },
 
+    // number: {
+    //     type: Number,
+    //     required: true,
+    // },
+
 })
 
 let chats = mongoose.model('chats', chatsSchema, 'chats');

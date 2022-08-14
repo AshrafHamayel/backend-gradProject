@@ -34,7 +34,7 @@ function isEmailValid(email) {
 
  
 
-appl.post('/signUp', (req, res) => {
+appl.post('/signUp', (req, res,err) => {
 
     var email = req.query.email;
     var name = req.query.name;
@@ -43,7 +43,7 @@ appl.post('/signUp', (req, res) => {
 
     if (isEmailValid(email)) {
 
-        if(confPassword!=pass){
+      
        
 
             let newUser = new userInfo(
@@ -61,12 +61,15 @@ appl.post('/signUp', (req, res) => {
 
                 });
 
-
+                if(pass== confPassword){
         newUser.save((err) => {
             if (!err) {
 
+             
               res.json({
-                  NT:'done'
+                  NT:'done',
+                  uid:newUser._id,
+                  imegUrl:newUser.image,
                       })
               console.log("done ");
                         
@@ -75,6 +78,8 @@ appl.post('/signUp', (req, res) => {
 
             else {
             
+                console.log('Email exists !');
+                console.log(err);
                 res.json({
                     NT:'Email exists !'
                 })
@@ -89,7 +94,7 @@ appl.post('/signUp', (req, res) => {
     else{
 
         console.log("password does not match"); 
-
+        console.log('this error'+err)
         res.json({
             NT:'password does not match'
         })

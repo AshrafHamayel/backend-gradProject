@@ -15,14 +15,14 @@ const login=require('./Pages/login');
 const signUp=require('./Pages/signUp');
 const logout=require('./Pages/logout');
 const myProf=require('./Pages/myProf');
-const chatMessage=require('./Pages/chatMessage');
+
 
 
 app.use('/login',login)
 app.use('/signUp',signUp);
 app.use('/logout',logout);
 app.use('/myProf',myProf);
-app.use('/chatMessage',chatMessage);
+
 
 app.use(authenticate);
 

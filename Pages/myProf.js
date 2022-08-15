@@ -12,10 +12,12 @@ var uploading = multer({
 })
 
 appl.get('/myProf', (req, res) => {
-   var emailP= req.query.email;
-    console.log(emailP +" --")
+   var UserId= req.query.UserId;
+    console.log(UserId +" --")
 
-    userInfo.findOne({ email: emailP })
+
+    if (UserId.length> 10){
+    userInfo.findOne({_id: UserId })
     .then(UserInfor => {
 
       if (!UserInfor) 
@@ -29,7 +31,12 @@ appl.get('/myProf', (req, res) => {
 
 
 });
+}
 
+else{
+  console.log('Id is Null ---------');
+
+}
 
    
 
@@ -37,15 +44,15 @@ appl.get('/myProf', (req, res) => {
 
 
 appl.post('/editPassword', (req, res) => {
-  var emailP= req.query.email;
+  var UserId= req.query.UserId;
   var oldPass = req.query.Opassword;
   var NewPass = req.query.Npassword;
   var ConfNewPass = req.query.NCpassword;
 
 
-  console.log(emailP +" --")
+  console.log(UserId +" --")
 
-  userInfo.findOne({ email: emailP })
+  userInfo.findOne({ _id: UserId })
   .then(UserInfor => {
 
     if (!UserInfor) 
@@ -58,7 +65,7 @@ appl.post('/editPassword', (req, res) => {
            if(NewPass==ConfNewPass){
 
         // const update = {  { password: NewPass } }
-        userInfo.findOneAndUpdate({ email: emailP }, { password: NewPass },(err) => {
+        userInfo.findOneAndUpdate({ _id: UserId }, { password: NewPass },(err) => {
       if (err) console.log(err);
       else
       return  res.json({
@@ -99,17 +106,17 @@ appl.post('/editPassword', (req, res) => {
 appl.post('/saveImage',(req, res) => {
   
 
-  var emailP= req.query.email;
+  var UserId= req.query.UserId;
  var imagePath= req.query.imagePath;
 
 
 
-    console.log(emailP +" --ashraf")
+    console.log(UserId +" --ashraf")
 
     console.log(imagePath +" --")
 
 
-  userInfo.findOne({ email: emailP })
+  userInfo.findOne({ _id: UserId })
   .then(UserInfor => {
 
     if (!UserInfor) 
@@ -122,7 +129,7 @@ appl.post('/saveImage',(req, res) => {
         //   if(NewPass==ConfNewPass){
 
       
-        userInfo.findOneAndUpdate({ email: emailP }, { image: imagePath },(err) => {
+        userInfo.findOneAndUpdate({ _id: UserId }, { image: imagePath },(err) => {
       if (err) console.log(err);
       else
       return  res.json({

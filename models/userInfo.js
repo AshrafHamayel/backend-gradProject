@@ -31,22 +31,33 @@ const userInfoSchema = new mongoose.Schema({
     },
 
     followers: {
-        type: String,
+        type: Number,
 
     },
 
     Ifollow: {
-        type: String,
+        type: Number,
     },
 
     evaluation: {
-        type: String,
+        type: Number,
     },
 
      description: {
         type: String,
     },
 
+    Section: {
+        type: String,
+    },
+
+    phoneNumber: {
+        type: Number,
+    },
+  
+    Location: {
+        type: String,
+    },
 
 
 

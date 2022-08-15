@@ -40,6 +40,7 @@ appl.post('/signUp', (req, res,err) => {
     var name = req.query.name;
     var pass = req.query.password;
     var confPassword = req.query.confPassword;
+    
 
     if (isEmailValid(email)) {
 
@@ -52,12 +53,15 @@ appl.post('/signUp', (req, res,err) => {
                     email: email,
                     name: name,
                     password: pass,
-                    image: 'NoImage.jpg',
+                    image: 'https://firebasestorage.googleapis.com/v0/b/work-book-62ba4.appspot.com/o/Images%2FNoImage.jpg?alt=media&token=74a4be84-df37-4510-b88e-431e980e608e',
                     work :'بدون مهنة',
                     followers : '00',
                     Ifollow : '00',
                     evaluation :'00',
-                    description : 'اضف وصف لعملك'
+                    description : 'اضف وصف لعملك',
+                    Section:'لا يوجد',
+                    phoneNumber:0,
+                    Location:'لا يوجد',
 
                 });
 
@@ -113,6 +117,67 @@ appl.post('/signUp', (req, res,err) => {
 
 
 });
+
+
+
+appl.post('/addUserFromGoogleOrFacebook', (req, res,err) => {
+
+    var email = req.query.email;
+    var name = req.query.name;
+    var Uimage = req.query.image;
+
+
+
+            let newUser = new userInfo(
+                {
+                   
+                    email: email,
+                    name: name,
+                    password:'password',
+                    image: Uimage,
+                    work :'بدون مهنة',
+                    followers : 00,
+                    Ifollow : 00,
+                    evaluation :00,
+                    description : 'اضف وصف لعملك',
+                    Section:'لا يوجد',
+                    phoneNumber:0,
+                    Location:'لا يوجد',
+
+                });
+
+               
+        newUser.save((err) => {
+            if (!err) {
+
+             
+              res.json({
+                  NT:'done',
+                  uid:newUser._id,
+                      })
+              console.log("done ");
+                        
+                      
+            }
+
+            else {
+            
+                console.log('Email exists !');
+                console.log(err);
+                res.json({
+                    NT:'Email exists !'
+                })
+                console.log('Email exists !');
+
+            }
+
+        })
+
+
+});
+
+
+
 
 
 module.exports = appl;

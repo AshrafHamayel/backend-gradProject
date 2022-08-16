@@ -126,7 +126,10 @@ appl.post('/addUserFromGoogleOrFacebook', (req, res,err) => {
     var name = req.query.name;
     var Uimage = req.query.image;
 
+    if (isEmailValid(email)) {
 
+      
+       
 
             let newUser = new userInfo(
                 {
@@ -165,14 +168,14 @@ appl.post('/addUserFromGoogleOrFacebook', (req, res,err) => {
                 console.log('Email exists !');
                 console.log(err);
                 res.json({
-                    NT:'Email exists !'
+                    NT:'Email exists !',
+                    uid:newUser._id,
                 })
-                console.log('Email exists !');
 
             }
 
         })
-
+    }
 
 });
 

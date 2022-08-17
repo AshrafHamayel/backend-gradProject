@@ -108,7 +108,11 @@ appl.get('/myPosts', (req, res) => {
  
        }
      else
-     return res.json(userPosts[0]);
+     {
+        console.log(userPosts);
+        return res.json(userPosts);
+
+     }
  
  
  });

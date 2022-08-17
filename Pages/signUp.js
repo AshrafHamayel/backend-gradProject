@@ -40,6 +40,7 @@ appl.post('/signUp', (req, res,err) => {
     var name = req.query.name;
     var pass = req.query.password;
     var confPassword = req.query.confPassword;
+    var token = req.query.fbm;
     
 
     if (isEmailValid(email)) {
@@ -63,6 +64,7 @@ appl.post('/signUp', (req, res,err) => {
                     phoneNumber:0,
                     Location:'لا يوجد',
                     Type:'email',
+                    Token:token,
 
 
                 });
@@ -127,6 +129,7 @@ appl.post('/addUserFromGoogleOrFacebook', (req, res,err) => {
     var email = req.query.email;
     var name = req.query.name;
     var Uimage = req.query.image;
+    var token = req.query.fbm;
 
     if (isEmailValid(email)) {
 
@@ -149,6 +152,8 @@ appl.post('/addUserFromGoogleOrFacebook', (req, res,err) => {
                     phoneNumber:0,
                     Location:'لا يوجد',
                     Type:'Google',
+                    Token:token,
+
 
                 });
 

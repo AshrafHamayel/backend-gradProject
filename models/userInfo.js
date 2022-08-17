@@ -61,7 +61,9 @@ const userInfoSchema = new mongoose.Schema({
     Type: {
         type: String,
     },
-
+    Token: {
+        type: String,
+    },
 
 
 

@@ -2,17 +2,19 @@ const mongoose = require('mongoose');
 
 const postsSchema = new mongoose.Schema({
 
-    name: {
+    name:
+     {
         type: String,
         required: true
     },
 
-    email: {
+   
+    id: {
         type: String,
         required: true,
-        unique: true
-
+       
     },
+
 
     
     imageuser: {
@@ -26,10 +28,25 @@ const postsSchema = new mongoose.Schema({
     },
 
     date: {
-        type: Date,
+        type: String,
         required: true,
       
     },
+
+    description: {
+        type: String,
+    },
+
+
+    numberLike: {
+        type: Number,
+    },
+
+    numberDisLike: 
+    {
+        type: Number,
+    },
+
 
 
 

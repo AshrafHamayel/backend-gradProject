@@ -129,7 +129,7 @@ appl.post('/saveImage',(req, res) => {
         //   if(NewPass==ConfNewPass){
 
       
-        userInfo.findOneAndUpdate({ _id: UserId }, { image: imagePath },(err) => {
+        userInfo.findOneAndUpdate({ _id: UserId }, { image: imagePath ,Type:'email'},(err) => {
       if (err) console.log(err);
       else
       return  res.json({

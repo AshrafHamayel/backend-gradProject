@@ -58,7 +58,9 @@ const userInfoSchema = new mongoose.Schema({
     Location: {
         type: String,
     },
-
+    Type: {
+        type: String,
+    },
 
 
 

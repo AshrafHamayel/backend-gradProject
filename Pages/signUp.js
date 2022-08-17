@@ -53,15 +53,17 @@ appl.post('/signUp', (req, res,err) => {
                     email: email,
                     name: name,
                     password: pass,
-                    image: 'https://firebasestorage.googleapis.com/v0/b/work-book-62ba4.appspot.com/o/Images%2FNoImage.jpg?alt=media&token=74a4be84-df37-4510-b88e-431e980e608e',
+                    image: 'NoImage.jpg',
                     work :'بدون مهنة',
-                    followers : '00',
-                    Ifollow : '00',
-                    evaluation :'00',
+                    followers : 00,
+                    Ifollow : 00,
+                    evaluation :00,
                     description : 'اضف وصف لعملك',
                     Section:'لا يوجد',
                     phoneNumber:0,
                     Location:'لا يوجد',
+                    Type:'email',
+
 
                 });
 
@@ -146,6 +148,7 @@ appl.post('/addUserFromGoogleOrFacebook', (req, res,err) => {
                     Section:'لا يوجد',
                     phoneNumber:0,
                     Location:'لا يوجد',
+                    Type:'Google',
 
                 });
 

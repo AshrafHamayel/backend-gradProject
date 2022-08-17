@@ -15,6 +15,7 @@ const login=require('./Pages/login');
 const signUp=require('./Pages/signUp');
 const logout=require('./Pages/logout');
 const myProf=require('./Pages/myProf');
+const addPost=require('./Pages/addPost');
 
 
 
@@ -22,7 +23,7 @@ app.use('/login',login)
 app.use('/signUp',signUp);
 app.use('/logout',logout);
 app.use('/myProf',myProf);
-
+app.use('/addPost',addPost);
 
 app.use(authenticate);
 
@@ -37,9 +38,12 @@ app.get('/', (req, res) => {
 
 
 
+
+
 app.listen('80',()=> 
 {
   console.log('server started on port 80');
+  
 
 });
 

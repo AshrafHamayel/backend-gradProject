@@ -52,10 +52,14 @@ const userInfoSchema = new mongoose.Schema({
     },
 
     phoneNumber: {
-        type: Number,
+        type: String,
+    },
+
+    Salary: {
+        type: String,
     },
   
-    Location: {
+    city: {
         type: String,
     },
     Type: {

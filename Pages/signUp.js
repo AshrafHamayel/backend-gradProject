@@ -42,7 +42,7 @@ appl.post('/signUp', (req, res,err) => {
     var confPassword = req.query.confPassword;
     var token = req.query.fbm;
     
-
+    console.log(email);
     if (isEmailValid(email)) {
 
       
@@ -61,8 +61,9 @@ appl.post('/signUp', (req, res,err) => {
                     evaluation :00,
                     description : 'اضف وصف لعملك',
                     Section:'لا يوجد',
-                    phoneNumber:0,
-                    Location:'لا يوجد',
+                    phoneNumber:'غير منوفر',
+                    city:'لا يوجد',
+                    Salary:'100',
                     Type:'email',
                     Token:token,
 
@@ -132,10 +133,6 @@ appl.post('/addUserFromGoogleOrFacebook', (req, res,err) => {
     var token = req.query.fbm;
 
     if (isEmailValid(email)) {
-
-      
-       
-
             let newUser = new userInfo(
                 {
                    
@@ -149,9 +146,11 @@ appl.post('/addUserFromGoogleOrFacebook', (req, res,err) => {
                     evaluation :00,
                     description : 'اضف وصف لعملك',
                     Section:'لا يوجد',
-                    phoneNumber:0,
-                    Location:'لا يوجد',
+                    phoneNumber:'غير منوفر',
+                    city:'لا يوجد',
                     Type:'Google',
+                    Salary:'100',
+
                     Token:token,
 
 
@@ -174,7 +173,6 @@ appl.post('/addUserFromGoogleOrFacebook', (req, res,err) => {
             else {
             
                 console.log('Email exists !');
-                console.log(err);
                 res.json({
                     NT:'Email exists !',
                     uid:newUser._id,
@@ -186,6 +184,45 @@ appl.post('/addUserFromGoogleOrFacebook', (req, res,err) => {
     }
 
 });
+
+
+
+
+
+appl.post('/addInfoUser', (req, res,err) => {
+
+    var Uid = req.query.UserId;
+    var _work = req.query.Work;
+    var _description = req.query.Description;
+    var _phoneNumber = req.query.PhoneNumber;
+    var _salary = req.query.Salary;
+    var _city = req.query.City;
+
+    console.log(Uid);
+
+    userInfo.findOneAndUpdate({ _id: Uid }, { work: _work , description:_description , phoneNumber:_phoneNumber ,Salary:_salary ,city:_city  },(err) => {
+        if (err) {
+            console.log(err);
+            console.log('Email Not exists !');
+            return  res.json({
+                NT:'Email Not exists !'
+            });
+
+
+        }
+        else
+        {
+            return  res.json({
+                NT:'done'
+            });
+
+        }
+       
+  
+      })
+
+});
+
 
 
 

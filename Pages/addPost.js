@@ -104,12 +104,12 @@ appl.get('/myPosts', (req, res) => {
  
        if (!userPosts) 
        {
-         console.log('not found');
+         console.log('not found Posts');
  
        }
      else
      {
-        console.log(userPosts);
+        console.log('not found');
         return res.json(userPosts);
 
      }

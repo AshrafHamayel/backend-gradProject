@@ -25,6 +25,8 @@ const postsSchema = new mongoose.Schema({
     imagepost: {
         type: String,
         required: true,
+        unique: true
+
     },
 
     date: {

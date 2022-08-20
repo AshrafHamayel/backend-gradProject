@@ -1,8 +1,8 @@
 
 const express = require('express');
-//const authenticate = require('../Authentication/authenticate'); /////  1
 const db = require('../config/database');
 const userInfo = require('../models/userInfo');
+const userLiksAndFollow = require('../models/userLiksAndFollow');
 
 const appl = express.Router();
 
@@ -56,9 +56,9 @@ appl.post('/signUp', (req, res,err) => {
                     password: pass,
                     image: 'NoImage.jpg',
                     work :'بدون مهنة',
-                    followers : 00,
-                    Ifollow : 00,
-                    evaluation :00,
+                    followers : 0,
+                    Ifollow : 0,
+                    evaluation :0,
                     description : 'اضف وصف لعملك',
                     Section:'لا يوجد',
                     phoneNumber:'غير منوفر',
@@ -70,15 +70,27 @@ appl.post('/signUp', (req, res,err) => {
 
                 });
 
+                
+
                 if(pass== confPassword){
         newUser.save((err) => {
             if (!err) {
+
+
+
+                let newUserLiksAndFollow = new userLiksAndFollow(
+                    {
+                        id:newUser._id,
+                       
+                    });
+                     newUserLiksAndFollow.save(() => { })
 
              
               res.json({
                   NT:'done',
                   uid:newUser._id,
                   imegUrl:newUser.image,
+                  token:newUser.Token,
                       })
               console.log("done ");
                         
@@ -141,9 +153,9 @@ appl.post('/addUserFromGoogleOrFacebook', (req, res,err) => {
                     password:'password',
                     image: Uimage,
                     work :'بدون مهنة',
-                    followers : 00,
-                    Ifollow : 00,
-                    evaluation :00,
+                    followers : 0,
+                    Ifollow : 0,
+                    evaluation :0,
                     description : 'اضف وصف لعملك',
                     Section:'لا يوجد',
                     phoneNumber:'غير منوفر',
@@ -161,10 +173,18 @@ appl.post('/addUserFromGoogleOrFacebook', (req, res,err) => {
             if (!err) {
 
              
-              res.json({
-                  NT:'done',
-                  uid:newUser._id,
-                      })
+                let newUserLiksAndFollow = new userLiksAndFollow(
+                    {
+                        id:newUser._id,
+                       
+                    });
+                     newUserLiksAndFollow.save(() => { })
+
+                res.json({
+                    NT:'done',
+                    uid:newUser._id,
+                    token:newUser.Token,
+                        })
               console.log("done ");
                         
                       
@@ -176,6 +196,7 @@ appl.post('/addUserFromGoogleOrFacebook', (req, res,err) => {
                 res.json({
                     NT:'Email exists !',
                     uid:newUser._id,
+                    token:newUser.Token,
                 })
 
             }
@@ -188,7 +209,7 @@ appl.post('/addUserFromGoogleOrFacebook', (req, res,err) => {
 
 
 
-
+var ArrIterest = new Array();
 appl.post('/addInfoUser', (req, res,err) => {
 
     var Uid = req.query.UserId;
@@ -197,11 +218,70 @@ appl.post('/addInfoUser', (req, res,err) => {
     var _phoneNumber = req.query.PhoneNumber;
     var _salary = req.query.Salary;
     var _city = req.query.City;
+    var iterest1 = req.query.Iterest1;
+    
+    ArrIterest.reverse
+    var section;
+    if(_work.includes('بناء')||_work.includes('طوبرجي')||_work.includes('طوبار')||_work.includes('بنّاء')||_work.includes('بنّا')||_work.includes('معلم طوبار')||_work.includes('بنا حجر')||_work.includes('بناء حجر')||_work.includes('بنّاء حجر')||_work.includes('بلوك')||_work.includes('بنأ')||_work.includes('بنأء')||_work.includes('بنا')||_work.includes('قصير')||_work.includes('قصار')||_work.includes('قصارة')||_work.includes('بقصر')||_work.includes('ائصير')||_work.includes('أصار')||_work.includes('معلم قصارة'))
+    section='Building';
+
+   else if(_work.includes('موسرجي')||_work.includes('كهربجي')||_work.includes('كهربائي')||_work.includes('تمديدات صحية')||_work.includes('تمديدات كهربائية')||_work.includes('فني كهرباء')||_work.includes('مواسير')||_work.includes('معلم كهربا')||_work.includes('معلم مياه')||_work.includes('تأسيس كهر')||_work.includes('تأسيس م')||_work.includes('تاسيس كهر')||_work.includes('تسيس م'))
+   section='WaterAndElectricity';
+    
+
+    else if(_work.includes('دهان')||_work.includes('ديكور دهان')||_work.includes('جبصين')||_work.includes('دهين')||_work.includes('دهّين')||_work.includes('معلم دها')||_work.includes('دهان و جبصين')||_work.includes('الدهان'))
+    section='PaintAndPlaster';
+
+    else if(_work.includes('بليط')||_work.includes('بلاط')||_work.includes('ببلط')||_work.includes('معلم بلاط')||_work.includes('بليّط')||_work.includes('رخام')||_work.includes('تبيلط')||_work.includes('ارضيات')||_work.includes('روب')||_work.includes('ترويب'))
+    section='Tiles';
+    
+    else if(_work.includes('عامل')||_work.includes('متنوع')||_work.includes('بشتغل عامل')||_work.includes('عمال')||_work.includes('شبتسيم')||_work.includes('شوبتسيم')||_work.includes('اعمال متنوعة')||_work.includes('اي شي'))
+    section='Worker';
+
+    else if(_work.includes('حدائق')||_work.includes('منسق حد')||_work.includes('تنظيف جناين')||_work.includes('جنانة')||_work.includes('جناين')||_work.includes('جنائن')||_work.includes('فني حدائق')||_work.includes('زراع')||_work.includes('زريعة')||_work.includes('مزارع')||_work.includes('فلاح'))
+    section='GardenCoordinator';
+
+    else if(_work.includes('قرميد')||_work.includes('سقف روف')||_work.includes('قرميد و ديكو')||_work.includes('خلايا')||_work.includes('شمسية')||_work.includes('تركيب خلايا'))
+    section='Brick';
+
+    else if(_work.includes('مصلح')||_work.includes('تصليح')||_work.includes('صيانة')||_work.includes('تزبيط'))
+    section='Reformer';
+
+    else if(_work.includes('تجليس سيارات')||_work.includes('ميكانيكي سيار')||_work.includes('تغيير زي')||_work.includes('مغسلة سيار')||_work.includes('تنظيف سيا')||_work.includes('منظف سيا'))
+    section='Trolleys';
+
+    else 
+    section='VarietyWorker';
+
+
+
+    
+    ArrIterest.push(section);
+    ArrIterest.push('VarietyWorker');
+
+    if(iterest1[1]=='true')
+    ArrIterest.push('Building');
+    if(iterest1[2]=='true')
+    ArrIterest.push('PaintAndPlaster');
+    if(iterest1[3]=='true')
+    ArrIterest.push('GardenCoordinator');
+    if(iterest1[4]=='true')
+    ArrIterest.push('WaterAndElectricity');
+    if(iterest1[5]=='true')
+    ArrIterest.push('Brick');
+    if(iterest1[6]=='true')
+    ArrIterest.push('Reformer');
+    if(iterest1[7]=='true')
+    ArrIterest.push('Trolleys');
+
+  
 
     console.log(Uid);
+  
 
-    userInfo.findOneAndUpdate({ _id: Uid }, { work: _work , description:_description , phoneNumber:_phoneNumber ,Salary:_salary ,city:_city  },(err) => {
+    userInfo.findOneAndUpdate({ _id: Uid }, { work: _work , description:_description , phoneNumber:_phoneNumber ,Salary:_salary ,city:_city ,Section:section,Iterest:ArrIterest },(err) => {
         if (err) {
+            
             console.log(err);
             console.log('Email Not exists !');
             return  res.json({

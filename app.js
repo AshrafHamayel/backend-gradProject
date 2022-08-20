@@ -1,13 +1,13 @@
 
 const express =require('express');
 const bodyParser=require('body-parser');
-const session = require('./Authentication/session');
-const authenticate = require('./Authentication/authenticate');
+//const session = require('./Authentication/session');
+//const authenticate = require('./Authentication/authenticate');
 //const db = require('./config/database');
 //const app = express.Router();
 const app=express();
 app.use(bodyParser.json());
-app.use(session);
+//app.use(session);
 
 
 
@@ -16,6 +16,7 @@ const signUp=require('./Pages/signUp');
 const logout=require('./Pages/logout');
 const myProf=require('./Pages/myProf');
 const addPost=require('./Pages/addPost');
+const usersInfo=require('./Pages/usersInfo');
 
 
 
@@ -24,15 +25,16 @@ app.use('/signUp',signUp);
 app.use('/logout',logout);
 app.use('/myProf',myProf);
 app.use('/addPost',addPost);
+app.use('/usersInfo',usersInfo);
 
-app.use(authenticate);
+//app.use(authenticate);
 
 
 // create the homepage route at '/'
 app.get('/', (req, res) => {
 
   console.log('Inside the homepage callback function')
-  console.log(req.sessionID)
+  //console.log(req.sessionID)
   res.send(`You hit home page!\n`)
 })
 

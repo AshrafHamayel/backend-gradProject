@@ -65,6 +65,22 @@ const userInfoSchema = new mongoose.Schema({
     Type: {
         type: String,
     },
+
+    Iterest: {
+        type: [String],
+    },
+
+
+    
+    latitude: {
+        type: String,
+    },
+    
+    longitude: {
+        type: String,
+    },
+
+
     Token: {
         type: String,
     },

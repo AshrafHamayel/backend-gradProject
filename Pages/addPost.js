@@ -94,7 +94,7 @@ appl.post('/newPost', (req, res,err) => {
 
 appl.get('/myPosts', (req, res) => {
     var UserId= req.query.UserId;
-     console.log(UserId +" --")
+    
  
  
      if (UserId.length> 10){
@@ -126,6 +126,45 @@ appl.get('/myPosts', (req, res) => {
     
  
  });
+
+
+
+ appl.get('/allPosts', (req, res) => {
+    var UserId= req.query.UserId;
+    
+ 
+ 
+     if (UserId.length> 10){
+        
+    Post.find()
+     .then(userPosts => {
+ 
+       if (!userPosts) 
+       {
+         console.log('not found Posts');
+ 
+       }
+     else
+     {
+        console.log('not found');
+        return res.json(userPosts);
+
+     }
+ 
+ 
+ });
+ }
+ 
+ else{
+   console.log('Id is Null ---------');
+ 
+ }
+ 
+    
+ 
+ });
+
+
 
  
 

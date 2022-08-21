@@ -4,8 +4,6 @@ const db = require('../config/database');
 const userInfo = require('../models/userInfo');
 const userLiksAndFollow = require('../models/userLiksAndFollow');
 
-
-
 const appl = express.Router();
 let sectionSameUsers='Building';
 
@@ -33,61 +31,61 @@ appl.get('/userSec', (req, res)  => {
    }
 
    else if (userCurren.Section==sectionBuilding){
-    console.log('قسم البناء');
+    // console.log('قسم البناء');
     return  res.json({NT:'قسم البناء' })
 
    }
 
 
    else if (userCurren.Section=='WaterAndElectricity'){
-    console.log('قسم التمديات الكهربائية و الصحية');
+    // console.log('قسم التمديات الكهربائية و الصحية');
     return  res.json({NT:'قسم التمديات الكهربائية والصحية' })
 
    }
 
    else if (userCurren.Section=='PaintAndPlaster'){
-    console.log('قسم الدهان و ديكورات الجبصين');
+    // console.log('قسم الدهان و ديكورات الجبصين');
     return  res.json({NT:'قسم الدهان و ديكورات الجبصين'})
 
    }
    else if (userCurren.Section=='Tiles'){
-    console.log('قسم البلاط');
+    // console.log('قسم البلاط');
     return  res.json({NT:'قسم البلاط' })
 
    }
 
    else if (userCurren.Section=='Worker'){
-    console.log('قسم العمال المساعدين للحرفيين ');
+    // console.log('قسم العمال المساعدين للحرفيين ');
     return  res.json({NT:'قسم العمال المساعدين للحرفيين ' })
 
    }
 
 
    else if (userCurren.Section=='GardenCoordinator'){
-    console.log('قسم منسقين الحدائق و الجنائن');
+    // console.log('قسم منسقين الحدائق و الجنائن');
     return  res.json({NT:'قسم منسقين الحدائق و الجنائن' })
 
    }
 
    else if (userCurren.Section=='Brick'){
-    console.log('قسم القرميد و الديكور');
+    // console.log('قسم القرميد و الديكور');
     return  res.json({NT:'قسم القرميد و الديكور' })
 
    }
    else if (userCurren.Section=='Reformer'){
-    console.log('قسم الصيانة و التصليح ');
+    // console.log('قسم الصيانة و التصليح ');
     return  res.json({NT:'قسم الصيانة و التصليح' })
 
    }
 
    else if (userCurren.Section=='Trolleys'){
-    console.log('قسم تصليح و غسيل المركبات');
+    // console.log('قسم تصليح و غسيل المركبات');
     return  res.json({NT:'قسم تصليح وغسيل المركبات' })
 
    }
 
    else{
-    console.log('قسم اعمال متنوعة');
+    // console.log('قسم اعمال متنوعة');
     return  res.json({NT:'قسم اعمال متنوعة' })
 
    }
@@ -118,14 +116,14 @@ appl.get('/getNameSecandSec', (req, res)  => {
 
    else if (userCurren.Section=='Building'){
     sectionSecandUsers='PaintAndPlaster';
-    console.log('قسم الدهان و ديكورات الجبصين');
+    // console.log('قسم الدهان و ديكورات الجبصين');
     return  res.json({NT:'قسم الدهان و ديكورات الجبصين' })
    }
 
 
    else{
     sectionSecandUsers='Building';
-    console.log('قسم البناء');
+    // console.log('قسم البناء');
     return  res.json({NT:'قسم البناء' })
 
    }
@@ -154,7 +152,7 @@ appl.get('/getNameThirdSec', (req, res)  => {
 
    else if (userCurren.Section=='WaterAndElectricity'){
     sectionThirdUsers='Tiles';
-    console.log('قسم البلاط');
+    // console.log('قسم البلاط');
     return  res.json({NT:'قسم البلاط' })
    }
 
@@ -162,7 +160,7 @@ appl.get('/getNameThirdSec', (req, res)  => {
    else{
 
     sectionThirdUsers='WaterAndElectricity';
-    console.log('قسم التمديات الكهربائية و الصحية');
+    // console.log('قسم التمديات الكهربائية و الصحية');
     return  res.json({NT:'قسم التمديات الكهربائية والصحية' })
    }
 
@@ -191,14 +189,14 @@ appl.get('/getNameFourthSec', (req, res)  => {
 
    else if (userCurren.Section=='PaintAndPlaster'||(userCurren.Section!='Worker'&&userCurren.Section==sectionSameUsers)||userCurren.Section=='Trolleys'){
     sectionFourthUsers='Worker';
-    console.log('قسم العمال');
+    // console.log('قسم العمال');
     return  res.json({NT:'قسم العمال المساعدين للحرفيين' })
    }
 
 
    else{
     sectionFourthUsers='Trolleys';
-    console.log('قسم تصليح و غسيل المركبات');
+    // console.log('قسم تصليح و غسيل المركبات');
     return  res.json({NT:'قسم تصليح وغسيل المركبات' })
    }
 
@@ -208,83 +206,6 @@ appl.get('/getNameFourthSec', (req, res)  => {
 
 
 });
-
-
-// //----------------------------Get Name Fifth sec --------------------------------------
-
-// appl.get('/getNameFifthSec', (req, res)  => {
-
-//   var CurrentUser= req.query.currentUser;
- 
-//  userInfo.findOne({_id:CurrentUser })
-//  .then(userCurren => {
-//    if(!userCurren){
-//     console.log('not found');
-//         return  res.json({
-//             NT:'not found'
-//         })
-//    }
-
-//    else if (userCurren.Section=='Tiles'){
-//     console.log('قسم تصليح و غسيل المركبات');
-//     return  res.json({NT:'قسم تصليح وغسيل المركبات' })
-//    }
-
-
-//    else{
-//     console.log('قسم البلاط');
-//     return  res.json({NT:'قسم البلاط' })
-//    }
-
-
-  
-// });
-
-
-// });
-
-
-
-// //----------------------------Get Name Sixth sec --------------------------------------
-
-// appl.get('/getNameSixthSec', (req, res)  => {
-
-//   var CurrentUser= req.query.currentUser;
- 
-//  userInfo.findOne({_id:CurrentUser })
-//  .then(userCurren => {
-//   sectionSameUsers=userCurren.Section;
-//    if(!userCurren){
-//     console.log('not found');
-//         return  res.json({
-//             NT:'not found'
-//         })
-//    }
-
-//    else if (userCurren.Section=='Trolleys'){
-//     console.log('قسم تصليح و غسيل المركبات');
-//     return  res.json({NT:'قسم تصليح وغسيل المركبات' })
-    
-//    }
-
-
-//    else{
-//     console.log('قسم تصليح و غسيل المركبات');
-//     return  res.json({NT:'قسم تصليح وغسيل المركبات' })
-//    }
-
-
-  
-// });
-
-
-// });
-
-
-
-
-
-
 
 
 //----------------------------Get users same sec--------------------------------------
@@ -322,7 +243,7 @@ appl.get('/usersSameSec', (req, res) => {
      UsersSameSec0.pop();
   }
   UsersSameSec0.pop();
-  console.log('SectionSameUsers Befor==='+SectionSameUsers);
+  // console.log('SectionSameUsers Befor==='+SectionSameUsers);
     var T;
     for(var i=0;i<SectionSameUsers.length;i++){
 
@@ -331,7 +252,7 @@ appl.get('/usersSameSec', (req, res) => {
 
     }
     
-    console.log('UsersSameSec0 After==='+UsersSameSec0);
+    // console.log('UsersSameSec0 After==='+UsersSameSec0);
 
     return res.json(UsersSameSec0);
 
@@ -455,6 +376,57 @@ appl.get('/getUsersFourthSec', (req, res) => {
 
 
 });
+
+
+
+
+//----------------------------get Users Fifth Sec--------------------------------------
+var UsersFifthh = new Array();
+
+appl.get('/getUsersFifthhSec', (req, res) => {
+
+ 
+ userInfo.find()
+ .then(usersBuilding => {
+
+   if (!usersBuilding) 
+   {
+     console.log('not found users Building');
+     return  res.json({
+         NT:'not found'
+     })
+ 
+   }
+ else
+ {
+   
+  for(var i=0;i<UsersFifthh.length;i++)
+  {
+    UsersFifthh.pop();
+    UsersFifthh.pop();
+
+    
+ }
+
+   for(var i=0;i<usersBuilding.length;i++)
+   {
+   
+     if(usersBuilding[i].Section!=sectionSameUsers &&usersBuilding[i].Section!= sectionSecandUsers&&usersBuilding[i].Section!= sectionThirdUsers&&usersBuilding[i].Section!= sectionFourthUsers)
+     UsersFifthh.push(usersBuilding[i]);
+
+   }
+   
+   //console.log(UsersFifthh);
+    return res.json(UsersFifthh);
+
+ }
+
+
+});
+
+
+});
+
 
 
 

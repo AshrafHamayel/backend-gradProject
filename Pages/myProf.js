@@ -10,7 +10,7 @@ const appl = express.Router();
 
 appl.get('/myProf', (req, res) => {
    var UserId= req.query.UserId;
-    console.log(UserId +" --")
+  
 
 
     if (UserId.length> 10){

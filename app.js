@@ -17,6 +17,7 @@ const logout=require('./Pages/logout');
 const myProf=require('./Pages/myProf');
 const addPost=require('./Pages/addPost');
 const usersInfo=require('./Pages/usersInfo');
+const addComit=require('./Pages/addComit');
 
 
 
@@ -26,6 +27,7 @@ app.use('/logout',logout);
 app.use('/myProf',myProf);
 app.use('/addPost',addPost);
 app.use('/usersInfo',usersInfo);
+app.use('/addComit',addComit);
 
 //app.use(authenticate);
 

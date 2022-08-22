@@ -29,6 +29,12 @@ const postsSchema = new mongoose.Schema({
 
     },
 
+    Section: {
+        type: String,
+       
+    },
+
+
     date: {
         type: String,
         required: true,

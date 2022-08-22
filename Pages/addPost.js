@@ -46,6 +46,7 @@ appl.post('/newPost', (req, res,err) => {
                     imagepost:imagePost,
                     date :mm,
                     description :descriptionPost,
+                    Section:ownerPost.Section,
                     numberLike : 0,
                     numberDisLike :0,
                   
@@ -98,6 +99,7 @@ appl.get('/myPosts', (req, res) => {
  
  
      if (UserId.length> 10){
+
         
     Post.find({id: UserId })
      .then(userPosts => {
@@ -109,7 +111,7 @@ appl.get('/myPosts', (req, res) => {
        }
      else
      {
-        console.log('not found');
+        
         return res.json(userPosts);
 
      }
@@ -128,13 +130,17 @@ appl.get('/myPosts', (req, res) => {
  });
 
 
+ var UsersPosts = new Array();
+
+ var AllJops = new Array('Building','WaterAndElectricity','Tiles','PaintAndPlaster','Brick','GardenCoordinator','Reformer','Trolleys','VarietyWorker');
 
  appl.get('/allPosts', (req, res) => {
     var UserId= req.query.UserId;
     
  
  
-     if (UserId.length> 10){
+     userInfo.findOne({ _id: UserId })
+    .then(Cuser => {
         
     Post.find()
      .then(userPosts => {
@@ -142,25 +148,197 @@ appl.get('/myPosts', (req, res) => {
        if (!userPosts) 
        {
          console.log('not found Posts');
- 
+        
        }
      else
      {
-        console.log('not found');
-        return res.json(userPosts);
+        
+        for(var i=0;i<UsersPosts.length;i++){
+            UsersPosts.pop();
+            UsersPosts.pop();
+        }
+            
+        var Index=-1;
+            for(var i=0;i<AllJops.length;i++)
+            {
+                if(AllJops[i]==Cuser.Section)
+                Index=i;
+            }
+ 
+
+            console.log(' Index ='+Index);
+            console.log(' AllJops[Index] ='+AllJops[Index]);
+            if(Index==-1){
+
+                
+          
+            for(var i=0;i<userPosts.length;i++)
+            {
+                if(userPosts[i].Section=='Worker')
+                UsersPosts.push(userPosts[i]);
+            }
+
+
+            Index=0; 
+            for(var i=0;i<userPosts.length;i++)
+            {
+                if(userPosts[i].Section==AllJops[Index])
+                UsersPosts.push(userPosts[i]);
+            }
+
+            Index=Index+1; 
+            for(var i=0;i<userPosts.length;i++)
+            {
+                if(userPosts[i].Section==AllJops[Index])
+                UsersPosts.push(userPosts[i]);
+            }
+
+            Index=Index+1; 
+            for(var i=0;i<userPosts.length;i++)
+            {
+                if(userPosts[i].Section==AllJops[Index])
+                UsersPosts.push(userPosts[i]);
+            }
+            
+            Index=Index+1; 
+            for(var i=0;i<userPosts.length;i++)
+            {
+                if(userPosts[i].Section==AllJops[Index])
+                UsersPosts.push(userPosts[i]);
+            }
+
+            Index=Index+1; 
+            for(var i=0;i<userPosts.length;i++)
+            {
+                if(userPosts[i].Section==AllJops[Index])
+                UsersPosts.push(userPosts[i]);
+            }
+            Index=Index+1; 
+            for(var i=0;i<userPosts.length;i++)
+            {
+                if(userPosts[i].Section==AllJops[Index])
+                UsersPosts.push(userPosts[i]);
+            }
+
+            Index=Index+1; 
+            for(var i=0;i<userPosts.length;i++)
+            {
+                if(userPosts[i].Section==AllJops[Index])
+                UsersPosts.push(userPosts[i]);
+            }
+
+            Index=Index+1; 
+            for(var i=0;i<userPosts.length;i++)
+            {
+                if(userPosts[i].Section==AllJops[Index])
+                UsersPosts.push(userPosts[i]);
+            }
+            Index=Index+1; 
+            for(var i=0;i<userPosts.length;i++)
+            {
+                if(userPosts[i].Section==AllJops[Index])
+                UsersPosts.push(userPosts[i]);
+            }
+        
+
+        return res.json(UsersPosts);
+
+
+
+            }
+
+            for(var i=0;i<userPosts.length;i++)
+            {
+                if(userPosts[i].Section==AllJops[Index])
+                UsersPosts.push(userPosts[i]);
+            }
+
+          
+            for(var i=0;i<userPosts.length;i++)
+            {
+                if(userPosts[i].Section=='Worker')
+                UsersPosts.push(userPosts[i]);
+            }
+
+            if(Index==8){ Index=0; }
+            else { Index=Index+1;}
+            for(var i=0;i<userPosts.length;i++)
+            {
+                if(userPosts[i].Section==AllJops[Index])
+                UsersPosts.push(userPosts[i]);
+            }
+
+            if(Index==8){ Index=0; }
+            else { Index=Index+1;}
+            for(var i=0;i<userPosts.length;i++)
+            {
+                if(userPosts[i].Section==AllJops[Index])
+                UsersPosts.push(userPosts[i]);
+            }
+
+            if(Index==8){ Index=0; }
+            else { Index=Index+1;}
+            for(var i=0;i<userPosts.length;i++)
+            {
+                if(userPosts[i].Section==AllJops[Index])
+                UsersPosts.push(userPosts[i]);
+            }
+            
+            if(Index==8){ Index=0; }
+            else { Index=Index+1;}
+            for(var i=0;i<userPosts.length;i++)
+            {
+                if(userPosts[i].Section==AllJops[Index])
+                UsersPosts.push(userPosts[i]);
+            }
+
+            if(Index==8){ Index=0; }
+            else { Index=Index+1;}
+            for(var i=0;i<userPosts.length;i++)
+            {
+                if(userPosts[i].Section==AllJops[Index])
+                UsersPosts.push(userPosts[i]);
+            }
+            if(Index==8){ Index=0; }
+            else { Index=Index+1;}
+            for(var i=0;i<userPosts.length;i++)
+            {
+                if(userPosts[i].Section==AllJops[Index])
+                UsersPosts.push(userPosts[i]);
+            }
+
+            if(Index==8){ Index=0; }
+            else { Index=Index+1;}
+            for(var i=0;i<userPosts.length;i++)
+            {
+                if(userPosts[i].Section==AllJops[Index])
+                UsersPosts.push(userPosts[i]);
+            }
+
+            if(Index==8){ Index=0; }
+            else { Index=Index+1;}
+            for(var i=0;i<userPosts.length;i++)
+            {
+                if(userPosts[i].Section==AllJops[Index])
+                UsersPosts.push(userPosts[i]);
+            }
+
+        
+              
+
+
+
+        return res.json(UsersPosts);
 
      }
  
  
  });
- }
+
+ });
+
  
- else{
-   console.log('Id is Null ---------');
- 
- }
- 
-    
+ console.log('not found user');
  
  });
 

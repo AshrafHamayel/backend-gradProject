@@ -4,7 +4,7 @@ const db = require('../config/database');
 const Post = require('../models/posts');
 const userInfo = require('../models/userInfo');
 const userLiksAndFollow = require('../models/userLiksAndFollow');
-
+const comit = require('../models/comit');
 const appl = express.Router();
 
 
@@ -21,14 +21,66 @@ appl.get('/myProf', (req, res) => {
       {
         console.log('not found');
 
-
-    }
+       }
     else
-    return res.json(UserInfor);
+    {
+
+      comit.find({id:UserId}).then(userRate => {
+
+        var RatingFrind;
+        var doubleNumber;
+        var SumRating=0;
+        var FinalRating;
+        var RatingsNumber = new Array();
+    
+          for(var i=0;i<userRate.length;i++)
+          {
+        
+            doubleNumber = parseFloat(userRate[i].rating);
+            RatingsNumber.push(doubleNumber);
+          }
+         
+          for(var i=0;i<RatingsNumber.length;i++)
+          {
+            SumRating=SumRating+RatingsNumber[i];
+          }
+         
+          FinalRating=(SumRating/RatingsNumber.length);
+          RatingFrind=FinalRating.toString();
+        
+       
+        console.log('RatingFrind=');
+        console.log(RatingFrind);
+
+        return  res.json({
+          _id:UserInfor._id,
+          email: UserInfor.email,
+          name: UserInfor.name,
+          image: UserInfor.image,
+          work :UserInfor.work,
+          followers : UserInfor.followers,
+          Ifollow : UserInfor.Ifollow,
+          evaluation :RatingFrind,
+          description : UserInfor.description,
+          Section:UserInfor.Section,
+          phoneNumber:UserInfor.phoneNumber,
+          city:UserInfor.city,
+          Type:UserInfor.Type,
+          Salary:UserInfor.Salary,
+          latitude:'false',
+          longitude:'false',
+          pressAttention:'false',
+
+      })
+
+
+
+        });
+      }
 
 
 });
-}
+    }
 
 else{
   console.log('Id is Null ---------');
@@ -58,17 +110,42 @@ var PressAttention0;
 
 
 
-    userLiksAndFollow.find({id:CurrentUser,Ifollow:{$all:[FrindId]} }).then(useerfollow => {
+    comit.find({id:FrindId}).then(userRate => {
 
+      var RatingFrind;
+      var doubleNumber;
+      var SumRating=0;
+      var FinalRating;
+      var RatingsNumber = new Array();
+      if(!userRate)
+      {
+        RatingFrind='false';
 
+      }
+
+      else
+      {
+       
+        for(var i=0;i<userRate.length;i++)
+        {
       
-      if(useerfollow.length>2)
-      PressAttention0='true'
-      if(useerfollow.length<2)
-      PressAttention0='false'
-
-        
-            console.log('false');
+          doubleNumber = parseFloat(userRate[i].rating);
+          RatingsNumber.push(doubleNumber);
+        }
+       
+        for(var i=0;i<RatingsNumber.length;i++)
+        {
+          SumRating=SumRating+RatingsNumber[i];
+        }
+       
+        FinalRating=(SumRating/RatingsNumber.length);
+        RatingFrind=FinalRating.toString();
+      
+      }
+      
+     
+      console.log('RatingFrind=');
+      console.log(RatingFrind);
             return  res.json({
               _id:UserInfor._id,
               email: UserInfor.email,
@@ -77,14 +154,16 @@ var PressAttention0;
               work :UserInfor.work,
               followers : UserInfor.followers,
               Ifollow : UserInfor.Ifollow,
-              evaluation :UserInfor.evaluation,
+              evaluation :RatingFrind,
               description : UserInfor.description,
               Section:UserInfor.Section,
               phoneNumber:UserInfor.phoneNumber,
               city:UserInfor.city,
               Type:UserInfor.Type,
               Salary:UserInfor.Salary,
-              pressAttention:PressAttention0,
+              latitude:'false',
+              longitude:'false',
+              pressAttention:'false',
           })
       
 

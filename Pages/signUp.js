@@ -55,16 +55,18 @@ appl.post('/signUp', (req, res,err) => {
                     name: name,
                     password: pass,
                     image: 'NoImage.jpg',
-                    work :'بدون مهنة',
+                    work :'---',
                     followers : 0,
                     Ifollow : 0,
                     evaluation :0,
-                    description : 'اضف وصف لعملك',
-                    Section:'لا يوجد',
+                    description : '---',
+                    Section:'VarietyWorker',
                     phoneNumber:'غير منوفر',
-                    city:'لا يوجد',
+                    city:'غير منوفر',
                     Salary:'100',
                     Type:'email',
+                    latitude:'false',
+                     longitude:'false', 
                     Token:token,
 
 
@@ -152,16 +154,18 @@ appl.post('/addUserFromGoogleOrFacebook', (req, res,err) => {
                     name: name,
                     password:'password',
                     image: Uimage,
-                    work :'بدون مهنة',
+                    work :'---',
                     followers : 0,
                     Ifollow : 0,
                     evaluation :0,
-                    description : 'اضف وصف لعملك',
-                    Section:'لا يوجد',
+                    description :'---',
+                    Section:'VarietyWorker',
                     phoneNumber:'غير منوفر',
-                    city:'لا يوجد',
+                    city:'غير منوفر',
                     Type:'Google',
                     Salary:'100',
+                    latitude:'false',
+                    longitude:'false',
 
                     Token:token,
 
@@ -247,7 +251,7 @@ appl.post('/addInfoUser', (req, res,err) => {
     else if(_work.includes('مصلح')||_work.includes('تصليح')||_work.includes('صيانة')||_work.includes('تزبيط'))
     section='Reformer';
 
-    else if(_work.includes('تجليس سيارات')||_work.includes('ميكانيكي سيار')||_work.includes('تغيير زي')||_work.includes('مغسلة سيار')||_work.includes('تنظيف سيا')||_work.includes('منظف سيا'))
+    else if(_work.includes('تجليس سيارات')||_work.includes('ميكانيكي سيار')||_work.includes('تغيير زي')||_work.includes('مغسلة سيار')||_work.includes('تنظيف سيا')||_work.includes('منظف سيا')||_work.includes('مغسلة'))
     section='Trolleys';
 
     else 

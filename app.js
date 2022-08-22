@@ -13,22 +13,20 @@ app.use(bodyParser.json());
 
 const login=require('./Pages/login');
 const signUp=require('./Pages/signUp');
-const logout=require('./Pages/logout');
 const myProf=require('./Pages/myProf');
 const addPost=require('./Pages/addPost');
 const usersInfo=require('./Pages/usersInfo');
 const addComit=require('./Pages/addComit');
-
+const search=require('./Pages/search');
 
 
 app.use('/login',login)
 app.use('/signUp',signUp);
-app.use('/logout',logout);
 app.use('/myProf',myProf);
 app.use('/addPost',addPost);
 app.use('/usersInfo',usersInfo);
 app.use('/addComit',addComit);
-
+app.use('/search',search);
 //app.use(authenticate);
 
 

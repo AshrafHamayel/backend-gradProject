@@ -70,8 +70,14 @@ const userInfoSchema = new mongoose.Schema({
         type: [String],
     },
 
+    Availability: {
+        type: String,
+    },
 
-    
+    UserType: {
+        type: String,
+    },
+
     latitude: {
         type: String,
     },

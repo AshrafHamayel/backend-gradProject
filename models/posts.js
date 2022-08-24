@@ -15,7 +15,11 @@ const postsSchema = new mongoose.Schema({
        
     },
 
-
+    idFriend: {
+        type: String,
+        required: true,
+       
+         },
     
     imageuser: {
         type: String,

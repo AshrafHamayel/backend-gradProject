@@ -16,6 +16,11 @@ const comitsSchema = new mongoose.Schema({
          },
 
 
+         idFriend: {
+            type: String,
+            required: true,
+           
+             },
     
     imageuser: 
     {

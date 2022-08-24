@@ -49,9 +49,7 @@ appl.get('/myProf', (req, res) => {
           RatingFrind=FinalRating.toString();
         
        
-        console.log('RatingFrind=');
-        console.log(RatingFrind);
-
+       
         return  res.json({
           _id:UserInfor._id,
           email: UserInfor.email,
@@ -69,6 +67,8 @@ appl.get('/myProf', (req, res) => {
           Salary:UserInfor.Salary,
           latitude:'false',
           longitude:'false',
+          Availability:UserInfor.Availability,
+          UserType:UserInfor.UserType,
           pressAttention:'false',
 
       })
@@ -144,8 +144,6 @@ var PressAttention0;
       }
       
      
-      console.log('RatingFrind=');
-      console.log(RatingFrind);
             return  res.json({
               _id:UserInfor._id,
               email: UserInfor.email,
@@ -163,6 +161,8 @@ var PressAttention0;
               Salary:UserInfor.Salary,
               latitude:'false',
               longitude:'false',
+              Availability:UserInfor.Availability,
+              UserType:UserInfor.UserType,
               pressAttention:'false',
           })
       

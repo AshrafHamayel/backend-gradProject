@@ -41,6 +41,7 @@ appl.post('/signUp', (req, res,err) => {
     var pass = req.query.password;
     var confPassword = req.query.confPassword;
     var token = req.query.fbm;
+    var usertype = req.query.userType;
     
     console.log(email);
     if (isEmailValid(email)) {
@@ -66,7 +67,9 @@ appl.post('/signUp', (req, res,err) => {
                     Salary:'100',
                     Type:'email',
                     latitude:'false',
-                     longitude:'false', 
+                    longitude:'false', 
+                     Availability:'true',
+                     UserType:usertype,
                     Token:token,
 
 
@@ -145,7 +148,7 @@ appl.post('/addUserFromGoogleOrFacebook', (req, res,err) => {
     var name = req.query.name;
     var Uimage = req.query.image;
     var token = req.query.fbm;
-
+    var usertype = req.query.userType;
     if (isEmailValid(email)) {
             let newUser = new userInfo(
                 {
@@ -166,7 +169,8 @@ appl.post('/addUserFromGoogleOrFacebook', (req, res,err) => {
                     Salary:'100',
                     latitude:'false',
                     longitude:'false',
-
+                    Availability:'true',
+                    UserType:usertype,
                     Token:token,
 
 
@@ -213,7 +217,7 @@ appl.post('/addUserFromGoogleOrFacebook', (req, res,err) => {
 
 
 
-var ArrIterest = new Array();
+
 appl.post('/addInfoUser', (req, res,err) => {
 
     var Uid = req.query.UserId;
@@ -222,9 +226,11 @@ appl.post('/addInfoUser', (req, res,err) => {
     var _phoneNumber = req.query.PhoneNumber;
     var _salary = req.query.Salary;
     var _city = req.query.City;
-    var iterest1 = req.query.Iterest1;
-    
-    ArrIterest.reverse
+    var lat= req.query.LAT;
+    var long= req.query.LONG;
+
+
+
     var section;
     if(_work.includes('بناء')||_work.includes('طوبرجي')||_work.includes('طوبار')||_work.includes('بنّاء')||_work.includes('بنّا')||_work.includes('معلم طوبار')||_work.includes('بنا حجر')||_work.includes('بناء حجر')||_work.includes('بنّاء حجر')||_work.includes('بلوك')||_work.includes('بنأ')||_work.includes('بنأء')||_work.includes('بنا')||_work.includes('قصير')||_work.includes('قصار')||_work.includes('قصارة')||_work.includes('بقصر')||_work.includes('ائصير')||_work.includes('أصار')||_work.includes('معلم قصارة'))
     section='Building';
@@ -260,30 +266,14 @@ appl.post('/addInfoUser', (req, res,err) => {
 
 
     
-    ArrIterest.push(section);
-    ArrIterest.push('VarietyWorker');
-
-    if(iterest1[1]=='true')
-    ArrIterest.push('Building');
-    if(iterest1[2]=='true')
-    ArrIterest.push('PaintAndPlaster');
-    if(iterest1[3]=='true')
-    ArrIterest.push('GardenCoordinator');
-    if(iterest1[4]=='true')
-    ArrIterest.push('WaterAndElectricity');
-    if(iterest1[5]=='true')
-    ArrIterest.push('Brick');
-    if(iterest1[6]=='true')
-    ArrIterest.push('Reformer');
-    if(iterest1[7]=='true')
-    ArrIterest.push('Trolleys');
+   
 
   
 
     console.log(Uid);
   
 
-    userInfo.findOneAndUpdate({ _id: Uid }, { work: _work , description:_description , phoneNumber:_phoneNumber ,Salary:_salary ,city:_city ,Section:section,Iterest:ArrIterest },(err) => {
+    userInfo.findOneAndUpdate({ _id: Uid }, { work: _work , description:_description , phoneNumber:_phoneNumber ,Salary:_salary ,city:_city ,Section:section,latitude:lat,longitude:long },(err) => {
         if (err) {
             
             console.log(err);
@@ -306,6 +296,46 @@ appl.post('/addInfoUser', (req, res,err) => {
       })
 
 });
+
+
+
+
+
+
+appl.post('/addNotWorkerInfo', (req, res,err) => {
+
+    var Uid = req.query.UserId;
+    var _description = req.query.Description;
+    var _city = req.query.City;
+    var lat= req.query.LAT;
+    var long= req.query.LONG;
+
+  
+
+    userInfo.findOneAndUpdate({ _id: Uid }, { description:_description ,city:_city,latitude:lat,longitude:long },(err) => {
+        if (err) {
+            
+            console.log(err);
+            console.log('Email Not exists !');
+            return  res.json({
+                NT:'Email Not exists !'
+            });
+
+
+        }
+        else
+        {
+            return  res.json({
+                NT:'done'
+            });
+
+        }
+       
+  
+      })
+
+});
+
 
 
 

@@ -57,12 +57,13 @@ appl.get('/myProf', (req, res) => {
           image: UserInfor.image,
           work :UserInfor.work,
           followers : UserInfor.followers,
-          Ifollow : UserInfor.Ifollow,
+          Ifollow : UserInfor.Iterest.length,
           evaluation :RatingFrind,
           rating: UserInfor.rating,
           Section:UserInfor.Section,
           phoneNumber:UserInfor.phoneNumber,
           city:UserInfor.city,
+          description : UserInfor.description,
           Type:UserInfor.Type,
           Salary:UserInfor.Salary,
           latitude:UserInfor.latitude,
@@ -94,7 +95,25 @@ else{
 appl.get('/frindProf', (req, res) => {
   var FrindId= req.query.frindId;
   var CurrentUser= req.query.currentUser;
-var PressAttention0;
+var Favv;
+
+
+userInfo.findOne({$and:[{_id: CurrentUser },{Iterest: FrindId }]})
+.then(UserFav => {
+
+  if (!UserFav) 
+  {
+    Favv='false';
+
+  }
+else{
+  Favv='true';
+  
+}
+
+})
+
+
 
    if (FrindId.length> 10){
    userInfo.findOne({_id: FrindId })
@@ -164,11 +183,9 @@ var PressAttention0;
               Availability:UserInfor.Availability,
               UserType:UserInfor.UserType,
               pressAttention:'false',
+              fav:Favv,
           })
       
-
-
-
    }
  )
 
@@ -485,60 +502,91 @@ appl.post('/UnsetAvailabil',(req, res) => {
 
 
 
-appl.post('/setFollow',(req, res) => {
+
+appl.post('/AddToFavorites',(req, res) => {
 
   
   var FrindId= req.query.frindId;
   var CurrentUser= req.query.currentUser;
-  console.log('from set Follow : ');
-  console.log('CurrentUser : '+CurrentUser);
-  console.log('FrindId : '+FrindId);
-
-  userLiksAndFollow.find({id:CurrentUser,Ifollow:{$all:[FrindId]} }).then(useerfollow => {
-
-    console.log('useerfollow : '+useerfollow+'after');
-    
-        if(useerfollow.id!=CurrentUser){
-          userLiksAndFollow.findOneAndUpdate({id:CurrentUser, },
-            {$push:{Ifollow:FrindId,},}).then(useerfollow1 => {
-              console.log('useerfollow1 : '+useerfollow1);
-              userLiksAndFollow.findOneAndUpdate({id:FrindId, },
-                {$push:{followers:CurrentUser,},}).then(useerfollow2 => {
-                  return  res.json({pressAttention:'false'})
-      
-                })
-      
-      
-            })
-        
-        }
-
-
-
-     else{
-
-      userLiksAndFollow.findOneAndUpdate({id:CurrentUser, },
-        {$pull:{Ifollow:FrindId,},}).then(useerfollow1 => {
-          console.log('else-useerfollow1 : '+useerfollow1);
-
-          userLiksAndFollow.findOneAndUpdate({id:FrindId, },
-            {$pull:{followers:CurrentUser,},}).then(useerfollow2 => {
-              console.log('else-useerfollow2 : '+useerfollow2);
-              return  res.json({pressAttention:'true'})
-            })
-
-
-        })
-        
-    }
-
-
-     }
+  
      
-   )
+  userInfo.findOne({ _id: CurrentUser })
+  .then(UserInfor => {
+
+    if (!UserInfor) 
+    {
+      console.log('not found');
+    }
+       else
+       {
+
+        
+        userInfo.findOneAndUpdate({ _id:CurrentUser },{ $push: { Iterest: FrindId }},(err) => {
+          if (err) console.log('saveImage ---1 '+err);
+          else
+          {
+    
+            return  res.json({NT:'done' })
+    
+          
+    
+          }
+        
+    
+        })
+     
+
+       }
+
+})
 
 
-});
+})
+
+
+
+
+
+appl.post('/removeFromFavourites',(req, res) => {
+
+  
+  var FrindId= req.query.frindId;
+  var CurrentUser= req.query.currentUser;
+  
+     
+  userInfo.findOne({ _id: CurrentUser })
+  .then(UserInfor => {
+
+    if (!UserInfor) 
+    {
+      console.log('not found');
+    }
+       else
+       {
+
+        
+        userInfo.findOneAndUpdate({ _id:CurrentUser },{ $pull: { Iterest: FrindId }},(err) => {
+          if (err) console.log('saveImage ---1 '+err);
+          else
+          {
+    
+            return  res.json({NT:'done' })
+    
+          
+    
+          }
+        
+    
+        })
+     
+
+       }
+
+})
+
+
+})
+
 
 
 
@@ -548,4 +596,60 @@ appl.post('/setFollow',(req, res) => {
 module.exports = appl;
 
 
+
+
+// appl.post('/setFollow',(req, res) => {
+
+  
+//   var FrindId= req.query.frindId;
+//   var CurrentUser= req.query.currentUser;
+//   console.log('from set Follow : ');
+//   console.log('CurrentUser : '+CurrentUser);
+//   console.log('FrindId : '+FrindId);
+
+//   userLiksAndFollow.find({id:CurrentUser,Ifollow:{$all:[FrindId]} }).then(useerfollow => {
+
+//     console.log('useerfollow : '+useerfollow+'after');
+    
+//         if(useerfollow.id!=CurrentUser){
+//           userLiksAndFollow.findOneAndUpdate({id:CurrentUser, },
+//             {$push:{Ifollow:FrindId,},}).then(useerfollow1 => {
+//               console.log('useerfollow1 : '+useerfollow1);
+//               userLiksAndFollow.findOneAndUpdate({id:FrindId, },
+//                 {$push:{followers:CurrentUser,},}).then(useerfollow2 => {
+//                   return  res.json({pressAttention:'false'})
+      
+//                 })
+      
+      
+//             })
+        
+//         }
+
+
+
+//      else{
+
+//       userLiksAndFollow.findOneAndUpdate({id:CurrentUser, },
+//         {$pull:{Ifollow:FrindId,},}).then(useerfollow1 => {
+//           console.log('else-useerfollow1 : '+useerfollow1);
+
+//           userLiksAndFollow.findOneAndUpdate({id:FrindId, },
+//             {$pull:{followers:CurrentUser,},}).then(useerfollow2 => {
+//               console.log('else-useerfollow2 : '+useerfollow2);
+//               return  res.json({pressAttention:'true'})
+//             })
+
+
+//         })
+        
+//     }
+
+
+//      }
+     
+//    )
+
+
+// });
 

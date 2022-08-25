@@ -270,7 +270,8 @@ appl.get('/getUsersSecondSec', (req, res) => {
       return  res.json(Users)
      }
      else{
-      userInfo.find({city:userCurren.city})
+      
+      userInfo.find({city:userCurren.city,Section:{ $not: { $regex:userCurren.Section} }})
  .then(SectionSameUsers => {
 
    if (!SectionSameUsers) 
@@ -309,7 +310,7 @@ appl.get('/getUsersThirdSec', (req, res) => {
       return  res.json(Users)
      }
      else{
-      userInfo.find({Section:userCurren.Section})
+      userInfo.find({Section:userCurren.Section,city:{ $not: { $regex:userCurren.city} }})
  .then(SectionSameUsers => {
 
    if (!SectionSameUsers) 
@@ -350,7 +351,7 @@ appl.get('/getUsersFourthSec', (req, res) => {
       return  res.json(Users)
      }
      else{
-      userInfo.find({$or:[{latitude:userCurren.latitude},{longitude:userCurren.longitude},{Salary:userCurren.Salary},{description:userCurren.description},{name:userCurren.name}] })
+      userInfo.find({$or:[{latitude:userCurren.latitude},{longitude:userCurren.longitude},{Salary:userCurren.Salary},{description:userCurren.description},{name:userCurren.name}],city:{ $not: { $regex:userCurren.city} },Section:{ $not: { $regex:userCurren.Section} }})
  .then(SectionSameUsers => {
 
    if (!SectionSameUsers) 

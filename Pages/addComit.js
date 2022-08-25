@@ -40,6 +40,7 @@ appl.post('/newComit', (req, res,err) => {
                 {
                     name:ownerComit.name,
                     id: frindId,
+                    idFriend:idComit,
                     imageuser: ownerComit.image,
                     imagecomit:imageComit1,
                     date :mm,

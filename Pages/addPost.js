@@ -47,6 +47,7 @@ appl.post('/newPost', (req, res,err) => {
                     date :mm,
                     description :descriptionPost,
                     Section:ownerPost.Section,
+                    city:ownerPost.city,
                     numberLike : 0,
                     numberDisLike :0,
                   
@@ -137,199 +138,23 @@ appl.get('/myPosts', (req, res) => {
  appl.get('/allPosts', (req, res) => {
     var UserId= req.query.UserId;
     
- 
- 
      userInfo.findOne({ _id: UserId })
     .then(Cuser => {
         
-    Post.find()
-     .then(userPosts => {
+    Post.find({$or:[{Section:Cuser.Section},{description:{$regex:Cuser.description}},{city:Cuser.city},{Section:Cuser.Section},{description:{$regex:Cuser.work}}] })
+    .then(userPosts => {
  
        if (!userPosts) 
        {
          console.log('not found Posts');
-        
+         return  res.json(Users)
        }
      else
      {
+
+        return  res.json(userPosts)
         
-        for(var i=0;i<UsersPosts.length;i++){
-            UsersPosts.pop();
-            UsersPosts.pop();
-        }
-            
-        var Index=-1;
-            for(var i=0;i<AllJops.length;i++)
-            {
-                if(AllJops[i]==Cuser.Section)
-                Index=i;
-            }
- 
-
-            console.log(' Index ='+Index);
-            console.log(' AllJops[Index] ='+AllJops[Index]);
-            if(Index==-1){
-
-                
-          
-            for(var i=0;i<userPosts.length;i++)
-            {
-                if(userPosts[i].Section=='Worker')
-                UsersPosts.push(userPosts[i]);
-            }
-
-
-            Index=0; 
-            for(var i=0;i<userPosts.length;i++)
-            {
-                if(userPosts[i].Section==AllJops[Index])
-                UsersPosts.push(userPosts[i]);
-            }
-
-            Index=Index+1; 
-            for(var i=0;i<userPosts.length;i++)
-            {
-                if(userPosts[i].Section==AllJops[Index])
-                UsersPosts.push(userPosts[i]);
-            }
-
-            Index=Index+1; 
-            for(var i=0;i<userPosts.length;i++)
-            {
-                if(userPosts[i].Section==AllJops[Index])
-                UsersPosts.push(userPosts[i]);
-            }
-            
-            Index=Index+1; 
-            for(var i=0;i<userPosts.length;i++)
-            {
-                if(userPosts[i].Section==AllJops[Index])
-                UsersPosts.push(userPosts[i]);
-            }
-
-            Index=Index+1; 
-            for(var i=0;i<userPosts.length;i++)
-            {
-                if(userPosts[i].Section==AllJops[Index])
-                UsersPosts.push(userPosts[i]);
-            }
-            Index=Index+1; 
-            for(var i=0;i<userPosts.length;i++)
-            {
-                if(userPosts[i].Section==AllJops[Index])
-                UsersPosts.push(userPosts[i]);
-            }
-
-            Index=Index+1; 
-            for(var i=0;i<userPosts.length;i++)
-            {
-                if(userPosts[i].Section==AllJops[Index])
-                UsersPosts.push(userPosts[i]);
-            }
-
-            Index=Index+1; 
-            for(var i=0;i<userPosts.length;i++)
-            {
-                if(userPosts[i].Section==AllJops[Index])
-                UsersPosts.push(userPosts[i]);
-            }
-            Index=Index+1; 
-            for(var i=0;i<userPosts.length;i++)
-            {
-                if(userPosts[i].Section==AllJops[Index])
-                UsersPosts.push(userPosts[i]);
-            }
         
-
-        return res.json(UsersPosts);
-
-
-
-            }
-
-            for(var i=0;i<userPosts.length;i++)
-            {
-                if(userPosts[i].Section==AllJops[Index])
-                UsersPosts.push(userPosts[i]);
-            }
-
-          
-            for(var i=0;i<userPosts.length;i++)
-            {
-                if(userPosts[i].Section=='Worker')
-                UsersPosts.push(userPosts[i]);
-            }
-
-            if(Index==8){ Index=0; }
-            else { Index=Index+1;}
-            for(var i=0;i<userPosts.length;i++)
-            {
-                if(userPosts[i].Section==AllJops[Index])
-                UsersPosts.push(userPosts[i]);
-            }
-
-            if(Index==8){ Index=0; }
-            else { Index=Index+1;}
-            for(var i=0;i<userPosts.length;i++)
-            {
-                if(userPosts[i].Section==AllJops[Index])
-                UsersPosts.push(userPosts[i]);
-            }
-
-            if(Index==8){ Index=0; }
-            else { Index=Index+1;}
-            for(var i=0;i<userPosts.length;i++)
-            {
-                if(userPosts[i].Section==AllJops[Index])
-                UsersPosts.push(userPosts[i]);
-            }
-            
-            if(Index==8){ Index=0; }
-            else { Index=Index+1;}
-            for(var i=0;i<userPosts.length;i++)
-            {
-                if(userPosts[i].Section==AllJops[Index])
-                UsersPosts.push(userPosts[i]);
-            }
-
-            if(Index==8){ Index=0; }
-            else { Index=Index+1;}
-            for(var i=0;i<userPosts.length;i++)
-            {
-                if(userPosts[i].Section==AllJops[Index])
-                UsersPosts.push(userPosts[i]);
-            }
-            if(Index==8){ Index=0; }
-            else { Index=Index+1;}
-            for(var i=0;i<userPosts.length;i++)
-            {
-                if(userPosts[i].Section==AllJops[Index])
-                UsersPosts.push(userPosts[i]);
-            }
-
-            if(Index==8){ Index=0; }
-            else { Index=Index+1;}
-            for(var i=0;i<userPosts.length;i++)
-            {
-                if(userPosts[i].Section==AllJops[Index])
-                UsersPosts.push(userPosts[i]);
-            }
-
-            if(Index==8){ Index=0; }
-            else { Index=Index+1;}
-            for(var i=0;i<userPosts.length;i++)
-            {
-                if(userPosts[i].Section==AllJops[Index])
-                UsersPosts.push(userPosts[i]);
-            }
-
-        
-              
-
-
-
-        return res.json(UsersPosts);
-
      }
  
  
@@ -347,3 +172,202 @@ appl.get('/myPosts', (req, res) => {
  
 
 module.exports = appl;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// for(var i=0;i<UsersPosts.length;i++){
+//     UsersPosts.pop();
+//     UsersPosts.pop();
+// }
+    
+// var Index=-1;
+//     for(var i=0;i<AllJops.length;i++)
+//     {
+//         if(AllJops[i]==Cuser.Section)
+//         Index=i;
+//     }
+
+
+//     console.log(' Index ='+Index);
+//     console.log(' AllJops[Index] ='+AllJops[Index]);
+//     if(Index==-1){
+
+        
+  
+//     for(var i=0;i<userPosts.length;i++)
+//     {
+//         if(userPosts[i].Section=='Worker')
+//         UsersPosts.push(userPosts[i]);
+//     }
+
+
+//     Index=0; 
+//     for(var i=0;i<userPosts.length;i++)
+//     {
+//         if(userPosts[i].Section==AllJops[Index])
+//         UsersPosts.push(userPosts[i]);
+//     }
+
+//     Index=Index+1; 
+//     for(var i=0;i<userPosts.length;i++)
+//     {
+//         if(userPosts[i].Section==AllJops[Index])
+//         UsersPosts.push(userPosts[i]);
+//     }
+
+//     Index=Index+1; 
+//     for(var i=0;i<userPosts.length;i++)
+//     {
+//         if(userPosts[i].Section==AllJops[Index])
+//         UsersPosts.push(userPosts[i]);
+//     }
+    
+//     Index=Index+1; 
+//     for(var i=0;i<userPosts.length;i++)
+//     {
+//         if(userPosts[i].Section==AllJops[Index])
+//         UsersPosts.push(userPosts[i]);
+//     }
+
+//     Index=Index+1; 
+//     for(var i=0;i<userPosts.length;i++)
+//     {
+//         if(userPosts[i].Section==AllJops[Index])
+//         UsersPosts.push(userPosts[i]);
+//     }
+//     Index=Index+1; 
+//     for(var i=0;i<userPosts.length;i++)
+//     {
+//         if(userPosts[i].Section==AllJops[Index])
+//         UsersPosts.push(userPosts[i]);
+//     }
+
+//     Index=Index+1; 
+//     for(var i=0;i<userPosts.length;i++)
+//     {
+//         if(userPosts[i].Section==AllJops[Index])
+//         UsersPosts.push(userPosts[i]);
+//     }
+
+//     Index=Index+1; 
+//     for(var i=0;i<userPosts.length;i++)
+//     {
+//         if(userPosts[i].Section==AllJops[Index])
+//         UsersPosts.push(userPosts[i]);
+//     }
+//     Index=Index+1; 
+//     for(var i=0;i<userPosts.length;i++)
+//     {
+//         if(userPosts[i].Section==AllJops[Index])
+//         UsersPosts.push(userPosts[i]);
+//     }
+
+
+// return res.json(UsersPosts);
+
+
+
+//     }
+
+//     for(var i=0;i<userPosts.length;i++)
+//     {
+//         if(userPosts[i].Section==AllJops[Index])
+//         UsersPosts.push(userPosts[i]);
+//     }
+
+  
+//     for(var i=0;i<userPosts.length;i++)
+//     {
+//         if(userPosts[i].Section=='Worker')
+//         UsersPosts.push(userPosts[i]);
+//     }
+
+//     if(Index==8){ Index=0; }
+//     else { Index=Index+1;}
+//     for(var i=0;i<userPosts.length;i++)
+//     {
+//         if(userPosts[i].Section==AllJops[Index])
+//         UsersPosts.push(userPosts[i]);
+//     }
+
+//     if(Index==8){ Index=0; }
+//     else { Index=Index+1;}
+//     for(var i=0;i<userPosts.length;i++)
+//     {
+//         if(userPosts[i].Section==AllJops[Index])
+//         UsersPosts.push(userPosts[i]);
+//     }
+
+//     if(Index==8){ Index=0; }
+//     else { Index=Index+1;}
+//     for(var i=0;i<userPosts.length;i++)
+//     {
+//         if(userPosts[i].Section==AllJops[Index])
+//         UsersPosts.push(userPosts[i]);
+//     }
+    
+//     if(Index==8){ Index=0; }
+//     else { Index=Index+1;}
+//     for(var i=0;i<userPosts.length;i++)
+//     {
+//         if(userPosts[i].Section==AllJops[Index])
+//         UsersPosts.push(userPosts[i]);
+//     }
+
+//     if(Index==8){ Index=0; }
+//     else { Index=Index+1;}
+//     for(var i=0;i<userPosts.length;i++)
+//     {
+//         if(userPosts[i].Section==AllJops[Index])
+//         UsersPosts.push(userPosts[i]);
+//     }
+//     if(Index==8){ Index=0; }
+//     else { Index=Index+1;}
+//     for(var i=0;i<userPosts.length;i++)
+//     {
+//         if(userPosts[i].Section==AllJops[Index])
+//         UsersPosts.push(userPosts[i]);
+//     }
+
+//     if(Index==8){ Index=0; }
+//     else { Index=Index+1;}
+//     for(var i=0;i<userPosts.length;i++)
+//     {
+//         if(userPosts[i].Section==AllJops[Index])
+//         UsersPosts.push(userPosts[i]);
+//     }
+
+//     if(Index==8){ Index=0; }
+//     else { Index=Index+1;}
+//     for(var i=0;i<userPosts.length;i++)
+//     {
+//         if(userPosts[i].Section==AllJops[Index])
+//         UsersPosts.push(userPosts[i]);
+//     }
+
+
+      
+
+
+
+// return res.json(UsersPosts);

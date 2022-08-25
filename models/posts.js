@@ -15,12 +15,9 @@ const postsSchema = new mongoose.Schema({
        
     },
 
-    idFriend: {
+    city: {
         type: String,
-        required: true,
-       
-         },
-    
+    },
     imageuser: {
         type: String,
         required: true,

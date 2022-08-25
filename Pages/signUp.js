@@ -59,7 +59,7 @@ appl.post('/signUp', (req, res,err) => {
                     work :'---',
                     followers : 0,
                     Ifollow : 0,
-                    evaluation :0,
+                    rating :'0',
                     description : '---',
                     Section:'VarietyWorker',
                     phoneNumber:'غير منوفر',
@@ -160,7 +160,7 @@ appl.post('/addUserFromGoogleOrFacebook', (req, res,err) => {
                     work :'---',
                     followers : 0,
                     Ifollow : 0,
-                    evaluation :0,
+                    rating :'0',
                     description :'---',
                     Section:'VarietyWorker',
                     phoneNumber:'غير منوفر',
@@ -172,8 +172,7 @@ appl.post('/addUserFromGoogleOrFacebook', (req, res,err) => {
                     Availability:'true',
                     UserType:usertype,
                     Token:token,
-
-
+                   
                 });
 
                
@@ -273,7 +272,7 @@ appl.post('/addInfoUser', (req, res,err) => {
     console.log(Uid);
   
 
-    userInfo.findOneAndUpdate({ _id: Uid }, { work: _work , description:_description , phoneNumber:_phoneNumber ,Salary:_salary ,city:_city ,Section:section,latitude:lat,longitude:long },(err) => {
+    userInfo.findOneAndUpdate({ _id: Uid }, { work: _work ,description:_description , phoneNumber:_phoneNumber ,Salary:_salary ,city:_city ,Section:section,latitude:lat,longitude:long },(err) => {
         if (err) {
             
             console.log(err);

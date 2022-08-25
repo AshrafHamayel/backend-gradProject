@@ -59,14 +59,14 @@ appl.get('/myProf', (req, res) => {
           followers : UserInfor.followers,
           Ifollow : UserInfor.Ifollow,
           evaluation :RatingFrind,
-          description : UserInfor.description,
+          rating: UserInfor.rating,
           Section:UserInfor.Section,
           phoneNumber:UserInfor.phoneNumber,
           city:UserInfor.city,
           Type:UserInfor.Type,
           Salary:UserInfor.Salary,
-          latitude:'false',
-          longitude:'false',
+          latitude:UserInfor.latitude,
+          longitude:UserInfor.longitude,
           Availability:UserInfor.Availability,
           UserType:UserInfor.UserType,
           pressAttention:'false',
@@ -143,7 +143,7 @@ var PressAttention0;
       
       }
       
-     
+      comit.findOneAndUpdate({id:FrindId},{rating:RatingFrind})
             return  res.json({
               _id:UserInfor._id,
               email: UserInfor.email,
@@ -152,7 +152,7 @@ var PressAttention0;
               work :UserInfor.work,
               followers : UserInfor.followers,
               Ifollow : UserInfor.Ifollow,
-              evaluation :RatingFrind,
+              rating :RatingFrind,
               description : UserInfor.description,
               Section:UserInfor.Section,
               phoneNumber:UserInfor.phoneNumber,
@@ -310,6 +310,96 @@ appl.post('/saveImage',(req, res) => {
   
 
 });
+
+
+
+
+appl.post('/setAvailabil',(req, res) => {
+  
+
+  var UserId= req.query.UserId;
+
+
+  userInfo.findOne({ _id: UserId })
+  .then(UserInfor => {
+
+    if (!UserInfor) 
+    {
+      console.log('not found');
+    }
+       else
+       {
+        
+        userInfo.findOneAndUpdate({ _id: UserId }, {Availability:'true'},(err) => {
+      if (err) console.log('saveImage ---1 '+err);
+      else
+      {
+        return  res.json({
+          NT:'done'
+      })
+
+      
+
+      }
+    
+
+    })
+
+           }
+      
+
+
+});
+
+  
+
+});
+
+
+
+
+appl.post('/UnsetAvailabil',(req, res) => {
+  
+
+  var UserId= req.query.UserId;
+
+
+  userInfo.findOne({ _id: UserId })
+  .then(UserInfor => {
+
+    if (!UserInfor) 
+    {
+      console.log('not found');
+    }
+       else
+       {
+        
+        userInfo.findOneAndUpdate({ _id: UserId }, {Availability:'false'},(err) => {
+      if (err) console.log('saveImage ---1 '+err);
+      else
+      {
+
+        return  res.json({NT:'done' })
+
+      
+
+      }
+    
+
+    })
+
+           }
+      
+
+
+});
+
+  
+
+});
+
+
+
 
 
 

@@ -39,10 +39,10 @@ const userInfoSchema = new mongoose.Schema({
         type: Number,
     },
 
-    evaluation: {
-        type: Number,
+    rating: 
+    {
+        type: String,
     },
-
      description: {
         type: String,
     },

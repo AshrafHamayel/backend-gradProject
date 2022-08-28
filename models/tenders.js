@@ -41,7 +41,16 @@ const tendersSchema = new mongoose.Schema({
         type: String,
     },
 
+    SectionEng: {
+        type: String,
+    },
+
+
     description: 
+    {
+        type: String,
+    },
+    CityTenders: 
     {
         type: String,
     },

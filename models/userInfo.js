@@ -31,12 +31,12 @@ const userInfoSchema = new mongoose.Schema({
     },
 
     followers: {
-        type: Number,
+        type: [String],
 
     },
 
     Ifollow: {
-        type: Number,
+        type: [String],
     },
 
     rating: 

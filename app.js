@@ -19,6 +19,7 @@ const usersInfo=require('./Pages/usersInfo');
 const addComit=require('./Pages/addComit');
 const search=require('./Pages/search');
 const addComplaint=require('./Pages/addComplaint');
+const addTenders=require('./Pages/addTenders');
 
 
 app.use('/login',login)
@@ -29,6 +30,8 @@ app.use('/usersInfo',usersInfo);
 app.use('/addComit',addComit);
 app.use('/search',search);
 app.use('/addComplaint',addComplaint);
+app.use('/addTenders',addTenders);
+
 //app.use(authenticate);
 
 

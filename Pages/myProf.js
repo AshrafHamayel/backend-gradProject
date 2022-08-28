@@ -57,7 +57,7 @@ appl.get('/myProf', (req, res) => {
           image: UserInfor.image,
           work :UserInfor.work,
           followers : UserInfor.followers,
-          Ifollow : UserInfor.Iterest.length,
+          Ifollow : UserInfor.Ifollow.length,
           evaluation :RatingFrind,
           rating: UserInfor.rating,
           Section:UserInfor.Section,
@@ -98,7 +98,7 @@ appl.get('/frindProf', (req, res) => {
 var Favv;
 
 
-userInfo.findOne({$and:[{_id: CurrentUser },{Iterest: FrindId }]})
+userInfo.findOne({$and:[{_id: CurrentUser },{Ifollow: FrindId }]})
 .then(UserFav => {
 
   if (!UserFav) 
@@ -521,7 +521,7 @@ appl.post('/AddToFavorites',(req, res) => {
        {
 
         
-        userInfo.findOneAndUpdate({ _id:CurrentUser },{ $push: { Iterest: FrindId }},(err) => {
+        userInfo.findOneAndUpdate({ _id:CurrentUser },{ $push: { Ifollow: FrindId }},(err) => {
           if (err) console.log('saveImage ---1 '+err);
           else
           {
@@ -565,7 +565,7 @@ appl.post('/removeFromFavourites',(req, res) => {
        {
 
         
-        userInfo.findOneAndUpdate({ _id:CurrentUser },{ $pull: { Iterest: FrindId }},(err) => {
+        userInfo.findOneAndUpdate({ _id:CurrentUser },{ $pull: { Ifollow: FrindId }},(err) => {
           if (err) console.log('saveImage ---1 '+err);
           else
           {

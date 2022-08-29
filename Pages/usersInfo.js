@@ -30,6 +30,8 @@ appl.get('/userSec', (req, res)  => {
         })
    }
 
+   
+
    else if (userCurren.Section==sectionBuilding){
     // console.log('قسم البناء');
     return  res.json({NT:'عمال البناء في مدينة '+ userCurren.city.toString() })

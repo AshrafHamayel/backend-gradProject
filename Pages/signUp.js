@@ -56,12 +56,12 @@ appl.post('/signUp', (req, res,err) => {
                     name: name,
                     password: pass,
                     image: 'NoImage.jpg',
-                    work :'---',
+                    work :'لم يقم باضافة مهنة',
                     rating :'0',
                     description : '---',
                     Section:'VarietyWorker',
-                    phoneNumber:'غير منوفر',
-                    city:'غير منوفر',
+                    phoneNumber:'غير مدرج',
+                    city:' لم يتم التحديد',
                     Salary:'100',
                     Type:'email',
                     latitude:'false',
@@ -155,12 +155,12 @@ appl.post('/addUserFromGoogleOrFacebook', (req, res,err) => {
                     name: name,
                     password:'password',
                     image: Uimage,
-                    work :'---',
+                    work :'لم يقم باضافة مهنة',
                     rating :'0',
-                    description :'---',
+                    description :' ',
                     Section:'VarietyWorker',
-                    phoneNumber:'غير منوفر',
-                    city:'غير منوفر',
+                    phoneNumber:'غير مدرج',
+                    city:' لم يتم التحديد',
                     Type:'Google',
                     Salary:'100',
                     latitude:'false',
@@ -302,12 +302,14 @@ appl.post('/addNotWorkerInfo', (req, res,err) => {
     var Uid = req.query.UserId;
     var _description = req.query.Description;
     var _city = req.query.City;
+    var _phoneNumber = req.query.PhoneNumber;
+
     var lat= req.query.LAT;
     var long= req.query.LONG;
 
   
 
-    userInfo.findOneAndUpdate({ _id: Uid }, { description:_description ,city:_city,latitude:lat,longitude:long },(err) => {
+    userInfo.findOneAndUpdate({ _id: Uid }, { description:_description ,city:_city,latitude:lat,longitude:long, phoneNumber:_phoneNumber },(err) => {
         if (err) {
             
             console.log(err);

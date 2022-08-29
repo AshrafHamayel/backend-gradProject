@@ -144,7 +144,7 @@ appl.get('/getApplicants', (req, res) => {
      if (tendersId.length> 10){
 
         
-     tenders.find({id: tendersId })
+     tenders.findOne({_id: tendersId })
      .then(userTenders => {
  
        if (!userTenders) 
@@ -220,7 +220,7 @@ appl.get('/getTendersForWorker', (req, res) => {
               }
             else
             {
-                tenders.find({applicants:UserId})
+                tenders.find({applicants:userId})
                 .then(Tendersss => {
             
                   if (!Tendersss) 

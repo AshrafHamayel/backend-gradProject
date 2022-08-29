@@ -56,7 +56,7 @@ appl.get('/myProf', (req, res) => {
           name: UserInfor.name,
           image: UserInfor.image,
           work :UserInfor.work,
-          followers : UserInfor.followers,
+          followers : UserInfor.followers.length,
           Ifollow : UserInfor.Ifollow.length,
           evaluation :RatingFrind,
           rating: UserInfor.rating,
@@ -169,8 +169,8 @@ else{
               name: UserInfor.name,
               image: UserInfor.image,
               work :UserInfor.work,
-              followers : UserInfor.followers,
-              Ifollow : UserInfor.Ifollow,
+              followers : UserInfor.followers.length,
+              Ifollow : UserInfor.Ifollow.length,
               rating :RatingFrind,
               description : UserInfor.description,
               Section:UserInfor.Section,
@@ -522,11 +522,23 @@ appl.post('/AddToFavorites',(req, res) => {
 
         
         userInfo.findOneAndUpdate({ _id:CurrentUser },{ $push: { Ifollow: FrindId }},(err) => {
-          if (err) console.log('saveImage ---1 '+err);
+          if (err) console.log('AddToFavorites-- '+err);
           else
           {
     
-            return  res.json({NT:'done' })
+            userInfo.findOneAndUpdate({ _id:FrindId },{ $push: { followers: CurrentUser }},(err) => {
+              if (err) console.log('AddToFavorites-- '+err);
+              else
+              {
+        
+                return  res.json({NT:'done' })
+        
+              
+        
+              }
+            
+        
+            })
     
           
     
@@ -570,7 +582,19 @@ appl.post('/removeFromFavourites',(req, res) => {
           else
           {
     
-            return  res.json({NT:'done' })
+            userInfo.findOneAndUpdate({ _id:FrindId },{ $pull: { followers: CurrentUser }},(err) => {
+              if (err) console.log('saveImage ---1 '+err);
+              else
+              {
+        
+                return  res.json({NT:'done' })
+        
+              
+        
+              }
+            
+        
+            })
     
           
     
@@ -586,6 +610,94 @@ appl.post('/removeFromFavourites',(req, res) => {
 
 
 })
+
+
+ 
+appl.get('/getFollow',(req, res) => {
+
+  
+  var userId= req.query.UserId;
+  var type= req.query.Type;
+  
+     if(type=='followers'){
+      userInfo.findOne({ _id: userId })
+      .then(Userinfo => {
+    
+        if (!Userinfo) 
+        {
+          console.log('not found');
+        }
+           else
+           {
+    
+            userInfo.find({_id:Userinfo.followers})
+            .then(followerss => {
+           
+              if (!followerss) 
+              {
+                console.log('not found users ');
+                return  res.json(Users)
+            
+              }
+            else
+            {
+               return res.json(followerss);
+            }
+           
+           
+           });
+           
+    
+           }
+    
+    })
+     }
+     else if(type=='Ifollow'){
+      userInfo.findOne({ _id: userId })
+      .then(Userinfo => {
+    
+        if (!Userinfo) 
+        {
+          console.log('not found');
+        }
+           else
+           {
+    
+            userInfo.find({_id:Userinfo.Ifollow})
+            .then(Ifolloww => {
+           
+              if (!Ifolloww) 
+              {
+                console.log('not found users ');
+                return  res.json(Users)
+            
+              }
+            else
+            {
+               return res.json(Ifolloww);
+            }
+           
+           
+           });
+           
+    
+           }
+    
+    })
+     }
+
+
+     else{
+      return  res.json({NT:'not Found'})
+
+     }
+
+
+
+
+})
+
+
 
 
 

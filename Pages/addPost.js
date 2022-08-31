@@ -13,10 +13,6 @@ let date_ob = new Date();
 let date = ("0" + date_ob.getDate()).slice(-2);
 let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
 let year = date_ob.getFullYear();
-let hours = date_ob.getHours();
-let minutes = date_ob.getMinutes();
-let seconds = date_ob.getSeconds();
-console.log(hours + ":" + minutes);
 let mm =year + "-" + month + "-" + date;
 /////////////////////////////////////////////////
 
@@ -48,8 +44,7 @@ appl.post('/newPost', (req, res,err) => {
                     description :descriptionPost,
                     Section:ownerPost.Section,
                     city:ownerPost.city,
-                    numberLike : 0,
-                    numberDisLike :0,
+                   
                   
                 });
 
@@ -63,8 +58,7 @@ appl.post('/newPost', (req, res,err) => {
                 imageuser: newPost.imageuser,
                 imagepost:newPost.imagepost,
                 description :newPost.description,
-                numberLike :newPost.numberLike,
-                numberDisLike :newPost.numberLike,
+          
                 
                     })
             console.log("done ");
@@ -168,6 +162,159 @@ appl.get('/myPosts', (req, res) => {
  });
 
 
+ 
+appl.post('/GeneralPosts',(req, res) => {
+
+  
+
+  var CurrentUser= req.query.currentUser;
+  
+
+  userInfo.findOneAndUpdate({ _id:CurrentUser },{TypePosts:'general'},(err) => {
+    if (err) console.log('GeneralPosts-- '+err);
+    else
+    {
+
+      return  res.json({NT:'done' })
+
+    
+
+    }
+  
+
+  })
+
+})
+
+
+
+ 
+appl.post('/FollowersPosts',(req, res) => {
+
+  
+
+  var CurrentUser= req.query.currentUser;
+  
+
+  userInfo.findOneAndUpdate({ _id:CurrentUser },{TypePosts:'Followers'},(err) => {
+    if (err) console.log('FollowersPosts-- '+err);
+    else
+    {
+
+      return  res.json({NT:'done' })
+
+    
+
+    }
+  
+
+  })
+
+})
+
+
+
+
+
+appl.get('/getPostsFollowers', (req, res) => {
+  var UserId= req.query.UserId;
+  
+   userInfo.findOne({ _id: UserId })
+  .then(Cuser => {
+      
+  Post.find({id:Cuser.Ifollow})
+  .then(userPosts => {
+
+     if (!userPosts) 
+     {
+       console.log('not found Posts');
+       return  res.json({NT:'not found' })
+     }
+   else
+   {
+
+      return  res.json(userPosts)
+      
+      
+   }
+
+
+});
+
+});
+
+
+console.log('not found user');
+
+});
+
+
+
+appl.post('/AddLike',(req, res) => {
+
+  
+  var post1= req.query.PostId;
+  var CurrentUser= req.query.currentUser;
+ 
+  Post.findOne({ _id:post1,Like: CurrentUser})
+.then(UserPost => {
+
+  if (!UserPost) 
+  {
+     Post.findOneAndUpdate({ _id:post1 },{ $push: { Like: CurrentUser }},(err) => {
+          if (err) {
+            console.log('Add like-- '+err);
+            return  res.json({NT:'not done' })
+          }
+          else
+          {
+    
+            return  res.json({NT:'done' })
+    
+          }
+        
+    
+        })
+    
+
+  }
+     else
+     {
+
+      
+      Post.findOneAndUpdate({ _id:post1 },{ $pull: { Like: CurrentUser }},(err) => {
+        if (err) {
+          console.log('Add like-- '+err);
+          return  res.json({NT:'not done' })
+        }
+        else
+        {
+  
+          return  res.json({NT:'done' })
+  
+        }
+      
+  
+      })
+   
+
+     }
+
+})
+
+  
+
+
+
+     
+
+       
+
+
+
+})
+
+
 
  
 
@@ -191,183 +338,3 @@ module.exports = appl;
 
 
 
-
-
-
-
-// for(var i=0;i<UsersPosts.length;i++){
-//     UsersPosts.pop();
-//     UsersPosts.pop();
-// }
-    
-// var Index=-1;
-//     for(var i=0;i<AllJops.length;i++)
-//     {
-//         if(AllJops[i]==Cuser.Section)
-//         Index=i;
-//     }
-
-
-//     console.log(' Index ='+Index);
-//     console.log(' AllJops[Index] ='+AllJops[Index]);
-//     if(Index==-1){
-
-        
-  
-//     for(var i=0;i<userPosts.length;i++)
-//     {
-//         if(userPosts[i].Section=='Worker')
-//         UsersPosts.push(userPosts[i]);
-//     }
-
-
-//     Index=0; 
-//     for(var i=0;i<userPosts.length;i++)
-//     {
-//         if(userPosts[i].Section==AllJops[Index])
-//         UsersPosts.push(userPosts[i]);
-//     }
-
-//     Index=Index+1; 
-//     for(var i=0;i<userPosts.length;i++)
-//     {
-//         if(userPosts[i].Section==AllJops[Index])
-//         UsersPosts.push(userPosts[i]);
-//     }
-
-//     Index=Index+1; 
-//     for(var i=0;i<userPosts.length;i++)
-//     {
-//         if(userPosts[i].Section==AllJops[Index])
-//         UsersPosts.push(userPosts[i]);
-//     }
-    
-//     Index=Index+1; 
-//     for(var i=0;i<userPosts.length;i++)
-//     {
-//         if(userPosts[i].Section==AllJops[Index])
-//         UsersPosts.push(userPosts[i]);
-//     }
-
-//     Index=Index+1; 
-//     for(var i=0;i<userPosts.length;i++)
-//     {
-//         if(userPosts[i].Section==AllJops[Index])
-//         UsersPosts.push(userPosts[i]);
-//     }
-//     Index=Index+1; 
-//     for(var i=0;i<userPosts.length;i++)
-//     {
-//         if(userPosts[i].Section==AllJops[Index])
-//         UsersPosts.push(userPosts[i]);
-//     }
-
-//     Index=Index+1; 
-//     for(var i=0;i<userPosts.length;i++)
-//     {
-//         if(userPosts[i].Section==AllJops[Index])
-//         UsersPosts.push(userPosts[i]);
-//     }
-
-//     Index=Index+1; 
-//     for(var i=0;i<userPosts.length;i++)
-//     {
-//         if(userPosts[i].Section==AllJops[Index])
-//         UsersPosts.push(userPosts[i]);
-//     }
-//     Index=Index+1; 
-//     for(var i=0;i<userPosts.length;i++)
-//     {
-//         if(userPosts[i].Section==AllJops[Index])
-//         UsersPosts.push(userPosts[i]);
-//     }
-
-
-// return res.json(UsersPosts);
-
-
-
-//     }
-
-//     for(var i=0;i<userPosts.length;i++)
-//     {
-//         if(userPosts[i].Section==AllJops[Index])
-//         UsersPosts.push(userPosts[i]);
-//     }
-
-  
-//     for(var i=0;i<userPosts.length;i++)
-//     {
-//         if(userPosts[i].Section=='Worker')
-//         UsersPosts.push(userPosts[i]);
-//     }
-
-//     if(Index==8){ Index=0; }
-//     else { Index=Index+1;}
-//     for(var i=0;i<userPosts.length;i++)
-//     {
-//         if(userPosts[i].Section==AllJops[Index])
-//         UsersPosts.push(userPosts[i]);
-//     }
-
-//     if(Index==8){ Index=0; }
-//     else { Index=Index+1;}
-//     for(var i=0;i<userPosts.length;i++)
-//     {
-//         if(userPosts[i].Section==AllJops[Index])
-//         UsersPosts.push(userPosts[i]);
-//     }
-
-//     if(Index==8){ Index=0; }
-//     else { Index=Index+1;}
-//     for(var i=0;i<userPosts.length;i++)
-//     {
-//         if(userPosts[i].Section==AllJops[Index])
-//         UsersPosts.push(userPosts[i]);
-//     }
-    
-//     if(Index==8){ Index=0; }
-//     else { Index=Index+1;}
-//     for(var i=0;i<userPosts.length;i++)
-//     {
-//         if(userPosts[i].Section==AllJops[Index])
-//         UsersPosts.push(userPosts[i]);
-//     }
-
-//     if(Index==8){ Index=0; }
-//     else { Index=Index+1;}
-//     for(var i=0;i<userPosts.length;i++)
-//     {
-//         if(userPosts[i].Section==AllJops[Index])
-//         UsersPosts.push(userPosts[i]);
-//     }
-//     if(Index==8){ Index=0; }
-//     else { Index=Index+1;}
-//     for(var i=0;i<userPosts.length;i++)
-//     {
-//         if(userPosts[i].Section==AllJops[Index])
-//         UsersPosts.push(userPosts[i]);
-//     }
-
-//     if(Index==8){ Index=0; }
-//     else { Index=Index+1;}
-//     for(var i=0;i<userPosts.length;i++)
-//     {
-//         if(userPosts[i].Section==AllJops[Index])
-//         UsersPosts.push(userPosts[i]);
-//     }
-
-//     if(Index==8){ Index=0; }
-//     else { Index=Index+1;}
-//     for(var i=0;i<userPosts.length;i++)
-//     {
-//         if(userPosts[i].Section==AllJops[Index])
-//         UsersPosts.push(userPosts[i]);
-//     }
-
-
-      
-
-
-
-// return res.json(UsersPosts);

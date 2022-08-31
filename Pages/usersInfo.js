@@ -2,7 +2,6 @@
 const express = require('express');
 const db = require('../config/database');
 const userInfo = require('../models/userInfo');
-const userLiksAndFollow = require('../models/userLiksAndFollow');
 
 const appl = express.Router();
 let sectionSameUsers='Building';
@@ -31,63 +30,72 @@ appl.get('/userSec', (req, res)  => {
    }
 
    
-
-   else if (userCurren.Section==sectionBuilding){
-    // console.log('قسم البناء');
-    return  res.json({NT:'عمال البناء في مدينة '+ userCurren.city.toString() })
-
-   }
-
-
-   else if (userCurren.Section=='WaterAndElectricity'){
-    // console.log('قسم التمديات الكهربائية و الصحية');
-    return  res.json({NT:'عمال التمديدات الكهربائية و الصحية في مدينة '+ userCurren.city.toString() })
-
-   }
-
-   else if (userCurren.Section=='PaintAndPlaster'){
-    // console.log('قسم الدهان و ديكورات الجبصين');
-    return  res.json({NT:'عمال الدهان و الجبصين في مدينة '+ userCurren.city.toString() })
-
-   }
-   else if (userCurren.Section=='Tiles'){
-    // console.log('قسم البلاط');
-    return  res.json({NT:'عمال البلاط في مدينة '+ userCurren.city.toString() })
-
-   }
-
-   
-   else if (userCurren.Section=='GardenCoordinator'){
-    // console.log('قسم منسقين الحدائق و الجنائن');
-    return  res.json({NT:'منسقين الحدائق في مدينة ' +userCurren.city.toString()})
-
-   }
-
-   else if (userCurren.Section=='Brick'){
-    // console.log('قسم القرميد و الديكور');
-    return  res.json({NT:'عمال القرميد و الديكور في مدينة ' +userCurren.city.toString() })
-
-   }
-   else if (userCurren.Section=='Reformer'){
-    // console.log('قسم الصيانة و التصليح ');
-    return  res.json({NT:'عمال الصيانة في مدينة '+ userCurren.city.toString() })
-
-   }
-
-   else if (userCurren.Section=='Trolleys'){
-    // console.log('قسم تصليح و غسيل المركبات');
-    return  res.json({NT:'قسم المركبات في مدينة ' + userCurren.city.toString() })
-
-   }
-
-   else 
+   else if (userCurren.UserType=='true')
    {
-    return  res.json({NT:'عمال ذو اعمال مختلفة في مدينة ' + userCurren.city.toString()})
+    return  res.json({NT:' عمال البناء في  '+ userCurren.city.toString() })
 
    }
 
-
-
+        else {
+           if (userCurren.Section==sectionBuilding){
+            // console.log('قسم البناء');
+            return  res.json({NT:' عمال البناء في  '+ userCurren.city.toString() })
+        
+           }
+        
+        
+           else if (userCurren.Section=='WaterAndElectricity'){
+            // console.log('قسم التمديات الكهربائية و الصحية');
+            return  res.json({NT:' عمال التمديدات الكهربائية و الصحية في  '+ userCurren.city.toString() })
+        
+           }
+        
+           else if (userCurren.Section=='PaintAndPlaster'){
+            // console.log('قسم الدهان و ديكورات الجبصين');
+            return  res.json({NT:'عمال الدهان و الجبصين في  '+ userCurren.city.toString() })
+        
+           }
+           else if (userCurren.Section=='Tiles'){
+            // console.log('قسم البلاط');
+            return  res.json({NT:' عمال البلاط في  '+ userCurren.city.toString() })
+        
+           }
+        
+           
+           else if (userCurren.Section=='GardenCoordinator'){
+            // console.log('قسم منسقين الحدائق و الجنائن');
+            return  res.json({NT:' منسقين الحدائق في  ' +userCurren.city.toString()})
+        
+           }
+        
+           else if (userCurren.Section=='Brick'){
+            // console.log('قسم القرميد و الديكور');
+            return  res.json({NT:' عمال القرميد و الديكور في  ' +userCurren.city.toString() })
+        
+           }
+           else if (userCurren.Section=='Reformer'){
+            // console.log('قسم الصيانة و التصليح ');
+            return  res.json({NT:' عمال الصيانة في  '+ userCurren.city.toString() })
+        
+           }
+        
+           else if (userCurren.Section=='Trolleys'){
+            // console.log('قسم تصليح و غسيل المركبات');
+            return  res.json({NT:' قسم المركبات في  ' + userCurren.city.toString() })
+        
+           }
+        
+           else 
+           {
+            return  res.json({NT:' عمال ذو اعمال مختلفة في  ' + userCurren.city.toString()})
+        
+           }
+        
+        
+        
+          
+        }
+  
 
   
 });
@@ -111,8 +119,17 @@ appl.get('/getNameSecandSec', (req, res)  => {
         })
    }
 
+
+   else if (userCurren.UserType=='true')
+   {
+    return  res.json({NT:' التمديدات  الكهربائية و الصحية في ' + userCurren.city.toString() })
+
+   }
+
+
+
    else {
-    return  res.json({NT:'اعمال و اقسام متنوعة في مدينة '+ userCurren.city.toString() })
+    return  res.json({NT:' اعمال و اقسام متنوعة في  '+ userCurren.city.toString() })
    }
 
   
@@ -137,86 +154,72 @@ appl.get('/getNameThirdSec', (req, res)  => {
         })
    }
 
-   else if (userCurren.Section==sectionBuilding){
-    // console.log('قسم البناء');
-    return  res.json({NT:'عمال البناء '})
 
-   }
-
-
-   else if (userCurren.Section=='WaterAndElectricity'){
-    return  res.json({NT:'عمال التمديدات الكهربائية و الصحية '})
-
-   }
-
-   else if (userCurren.Section=='PaintAndPlaster'){
-    return  res.json({NT:'عمال الدهان و الجبصين   '})
-
-   }
-   else if (userCurren.Section=='Tiles'){
-    return  res.json({NT:'عمال البلاط'})
-
-   }
-
-   
-   else if (userCurren.Section=='GardenCoordinator'){
-    return  res.json({NT:'منسقين الحدائق'})
-
-   }
-
-   else if (userCurren.Section=='Brick'){
-    return  res.json({NT:'عمال القرميد و الديكور' })
-
-   }
-   else if (userCurren.Section=='Reformer'){
-    return  res.json({NT:'عمال الصيانة'})
-
-   }
-
-   else if (userCurren.Section=='Trolleys'){
-    return  res.json({NT:'قسم المركبات'})
-
-   }
-
-   else 
+   else if (userCurren.UserType=='true')
    {
-    return  res.json({NT:'عمال ذو اعمال مختلفة'})
+    return  res.json({NT:'  عمال الدهان و الديكور في  '+ userCurren.city.toString() })
 
+   }
+
+   else{
+
+    if (userCurren.Section==sectionBuilding){
+      // console.log('قسم البناء');
+      return  res.json({NT:'عمال البناء '})
+  
+     }
+  
+  
+     else if (userCurren.Section=='WaterAndElectricity'){
+      return  res.json({NT:'عمال التمديدات الكهربائية و الصحية '})
+  
+     }
+  
+     else if (userCurren.Section=='PaintAndPlaster'){
+      return  res.json({NT:'عمال الدهان و الجبصين   '})
+  
+     }
+     else if (userCurren.Section=='Tiles'){
+      return  res.json({NT:'عمال البلاط'})
+  
+     }
+  
+     
+     else if (userCurren.Section=='GardenCoordinator'){
+      return  res.json({NT:'منسقين الحدائق'})
+  
+     }
+  
+     else if (userCurren.Section=='Brick'){
+      return  res.json({NT:'عمال القرميد و الديكور' })
+  
+     }
+     else if (userCurren.Section=='Reformer'){
+      return  res.json({NT:'عمال الصيانة'})
+  
+     }
+  
+     else if (userCurren.Section=='Trolleys'){
+      return  res.json({NT:'قسم المركبات'})
+  
+     }
+  
+     else 
+     {
+      return  res.json({NT:'عمال ذو اعمال مختلفة'})
+  
+     }
+  
+  
+  
    }
 
 
 
-
   
 });
 });
 
-
-// //----------------------------Get Name Fourth sec --------------------------------------
-
-// appl.get('/getNameFourthSec', (req, res)  => {
-
-//   var CurrentUser= req.query.currentUser;
- 
-//  userInfo.findOne({_id:CurrentUser })
-//  .then(userCurren => {
-//    if(!userCurren){
-//     console.log('not found');
-//         return  res.json({
-//             NT:'not found'
-//         })
-//    }
-
-//    else{
-//     return  res.json({NT:'أخرى ...' })
-//    }
-
-
-  
-// });
-
-
-// });
 
 
 //----------------------------Get users same sec--------------------------------------
@@ -230,6 +233,29 @@ appl.get('/usersSameSec', (req, res) => {
       console.log('not found Get users same sec');
       return  res.json(Users)
      }
+
+
+     else if (userCurren.UserType=='true')
+     {
+      userInfo.find({$and:[{Section:'Building'},{city:userCurren.city}] })
+      .then(SectionSameUsers => {
+        if (!SectionSameUsers) 
+        {
+          console.log('not found users ');
+          return  res.json(Users)
+      
+        }
+      else
+      {
+         return res.json(SectionSameUsers);
+      }
+     
+     
+     });
+  
+     }
+
+
      else{
       userInfo.find({$and:[{Section:userCurren.Section},{city:userCurren.city}] })
  .then(SectionSameUsers => {
@@ -271,6 +297,29 @@ appl.get('/getUsersSecondSec', (req, res) => {
       console.log('not found  get Users Second Sec');
       return  res.json(Users)
      }
+
+
+     else if (userCurren.UserType=='true')
+     {
+      userInfo.find({$and:[{Section:'WaterAndElectricity'},{city:userCurren.city}] })
+      .then(SectionSameUsers => {
+        if (!SectionSameUsers) 
+        {
+          console.log('not found users ');
+          return  res.json(Users)
+      
+        }
+      else
+      {
+         return res.json(SectionSameUsers);
+      }
+     
+     
+     });
+  
+     }
+
+
      else{
       
       userInfo.find({city:userCurren.city,Section:{ $not: { $regex:userCurren.Section} }})
@@ -310,6 +359,27 @@ appl.get('/getUsersThirdSec', (req, res) => {
     if(!userCurren){
       console.log('not found get Users Third Sec');
       return  res.json(Users)
+     }
+
+
+     else if (userCurren.UserType=='true')
+     {
+      userInfo.find({$and:[{Section:'PaintAndPlaster'},{city:userCurren.city}] })
+      .then(SectionSameUsers => {
+        if (!SectionSameUsers) 
+        {
+          console.log('not found users ');
+          return  res.json(Users)
+      
+        }
+      else
+      {
+         return res.json(SectionSameUsers);
+      }
+     
+     
+     });
+  
      }
      else{
       userInfo.find({Section:userCurren.Section,city:{ $not: { $regex:userCurren.city} }})

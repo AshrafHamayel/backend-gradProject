@@ -2,7 +2,6 @@
 const express = require('express');
 const db = require('../config/database');
 const userInfo = require('../models/userInfo');
-const userLiksAndFollow = require('../models/userLiksAndFollow');
 
 const appl = express.Router();
 
@@ -64,11 +63,12 @@ appl.post('/signUp', (req, res,err) => {
                     city:' لم يتم التحديد',
                     Salary:'100',
                     Type:'email',
-                    latitude:'false',
-                    longitude:'false', 
+                    latitude:'1',
+                    longitude:'1', 
                      Availability:'true',
                      UserType:usertype,
                     Token:token,
+                    TypePosts:'general',
 
 
                 });
@@ -78,15 +78,6 @@ appl.post('/signUp', (req, res,err) => {
                 if(pass== confPassword){
         newUser.save((err) => {
             if (!err) {
-
-
-
-                let newUserLiksAndFollow = new userLiksAndFollow(
-                    {
-                        id:newUser._id,
-                       
-                    });
-                     newUserLiksAndFollow.save(() => { })
 
              
               res.json({
@@ -163,25 +154,19 @@ appl.post('/addUserFromGoogleOrFacebook', (req, res,err) => {
                     city:' لم يتم التحديد',
                     Type:'Google',
                     Salary:'100',
-                    latitude:'false',
-                    longitude:'false',
+                    latitude:'1',
+                    longitude:'1',
                     Availability:'true',
                     UserType:usertype,
                     Token:token,
-                   
+                    TypePosts:'general',
                 });
 
                
         newUser.save((err) => {
             if (!err) {
 
-             
-                let newUserLiksAndFollow = new userLiksAndFollow(
-                    {
-                        id:newUser._id,
-                       
-                    });
-                     newUserLiksAndFollow.save(() => { })
+            
 
                 res.json({
                     NT:'done',

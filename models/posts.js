@@ -47,15 +47,12 @@ const postsSchema = new mongoose.Schema({
     },
 
 
-    numberLike: {
-        type: Number,
-    },
-
-    numberDisLike: 
+    Like: 
     {
-        type: Number,
+        type: [String],
     },
 
+ 
 
 
 

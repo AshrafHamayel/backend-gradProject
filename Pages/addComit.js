@@ -115,6 +115,46 @@ appl.get('/youComits', (req, res) => {
  
  });
 
+
+
+ appl.get('/myComits', (req, res) => {
+    var frindId= req.query.FrindId;
+     console.log(frindId +" --")
+ 
+ 
+     if (frindId.length> 10){
+        
+        comit.find({idFriend: frindId })
+     .then(userComits => {
+ 
+       if (!userComits) 
+       {
+         console.log('not found Comits');
+ 
+       }
+     else
+     {
+        
+        return res.json(userComits);
+
+     }
+ 
+ 
+ });
+ }
+ 
+ else{
+   console.log('Id is Null ---------');
+ 
+ }
+ 
+    
+ 
+ });
+
+ 
+
+
  
 
 module.exports = appl;

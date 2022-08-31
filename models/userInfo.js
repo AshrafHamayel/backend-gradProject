@@ -87,6 +87,13 @@ const userInfoSchema = new mongoose.Schema({
     },
 
 
+    TypePosts: {
+        type: String,
+    },
+
+
+
+
     Token: {
         type: String,
     },

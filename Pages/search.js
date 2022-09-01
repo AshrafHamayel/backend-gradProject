@@ -18,11 +18,8 @@ appl.get('/getResultSearch', (req, res) => {
   var City= req.query.city;
   var Closest= req.query.closest;
   var jops;
-  // console.log('CurrentUser---'+CurrentUser)
-  // console.log('NameWorker---'+NameWorker)
- console.log('Work---'+Work)
-   console.log('City---'+City)
-  // console.log('Closest---'+Closest)
+
+
 
   jops=Work.split(".");
   var JOP=jops[1].toString();
@@ -51,7 +48,6 @@ appl.get('/getResultSearch', (req, res) => {
     
        if (!usersSameWork) 
        {
-         console.log('not found users Building');
          return  res.json({
              NT:'not found'
          })
@@ -80,7 +76,6 @@ appl.get('/getResultSearch', (req, res) => {
 
    if (!usersAnyWork) 
    {
-     console.log('not found users Building');
      return  res.json({
          NT:'not found'
      })
@@ -115,7 +110,6 @@ appl.get('/getResultSearch', (req, res) => {
     
        if (!usersSameWork) 
        {
-         console.log('not found users Building');
          return  res.json({
              NT:'not found'
          })
@@ -144,7 +138,6 @@ appl.get('/getResultSearch', (req, res) => {
 
    if (!usersAnyWork) 
    {
-     console.log('not found users Building');
      return  res.json({
          NT:'not found'
      })
@@ -197,7 +190,6 @@ appl.get('/getResultSearch', (req, res) => {
  
     if (!usersSameWork) 
     {
-      console.log('not found users Building');
       return  res.json({
           NT:'not found'
       })
@@ -226,7 +218,6 @@ userInfo.find({$and:[{Section:JOP},{name:{$regex:NameWorker}}]})
 
 if (!usersAnyWork) 
 {
-  console.log('not found users Building');
   return  res.json({
       NT:'not found'
   })
@@ -261,7 +252,6 @@ else
  
     if (!usersSameWork) 
     {
-      console.log('not found users Building');
       return  res.json({
           NT:'not found'
       })
@@ -291,7 +281,6 @@ userInfo.find({Section:JOP})
 
 if (!usersAnyWork) 
 {
-  console.log('not found users Building');
   return  res.json({
       NT:'not found'
   })

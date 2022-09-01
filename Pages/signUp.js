@@ -231,7 +231,7 @@ appl.post('/addInfoUser', (req, res,err) => {
     else if(_work.includes('حدائق')||_work.includes('منسق حد')||_work.includes('تنظيف جناين')||_work.includes('جنانة')||_work.includes('جناين')||_work.includes('جنائن')||_work.includes('فني حدائق')||_work.includes('زراع')||_work.includes('زريعة')||_work.includes('مزارع')||_work.includes('فلاح'))
     section='GardenCoordinator';
 
-    else if(_work.includes('قرميد')||_work.includes('سقف روف')||_work.includes('قرميد و ديكو')||_work.includes('خلايا')||_work.includes('شمسية')||_work.includes('تركيب خلايا'))
+    else if(_work.includes('قرميد')||_work.includes('سقف روف')||_work.includes('قرميد و ديكو')||_work.includes('خلايا')||_work.includes('شمسية')||_work.includes('تركيب خلايا')||_work.includes('معلم قرمي'))
     section='Brick';
 
     else if(_work.includes('مصلح')||_work.includes('تصليح')||_work.includes('صيانة')||_work.includes('تزبيط'))

@@ -235,6 +235,60 @@ else{
 
 
 
+//////////////////////
+appl.get('/posCurrentFrind', (req, res) => {
+  var FrindId= req.query.frindId;
+  var CurrentUser= req.query.currentUser;
+
+
+ 
+
+
+userInfo.findOne({_id:CurrentUser})
+.then(UserCurrent => {
+ if (!UserCurrent) 
+  {
+    res.json({ NT:'Not found'});
+  }
+
+else{ 
+ 
+      
+        userInfo.findOne({_id: FrindId})
+        .then(UserFrind => {
+         if (!UserFrind) 
+          {
+            res.json({ NT:'Not found'});
+          }
+        
+        else{ 
+        
+          res.json({
+            CurrentUserLat:UserCurrent.latitude,
+            CurrentUserLong:UserCurrent.longitude,
+            FrindUserLat:UserFrind.latitude,
+            FrindUserLong:UserFrind.longitude,
+          
+         })
+         
+        
+        }
+        
+        })
+      
+      
+      }
+
+})
+
+ 
+
+
+
+
+
+
+});
 
 
 

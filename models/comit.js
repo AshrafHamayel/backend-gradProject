@@ -53,6 +53,12 @@ const comitsSchema = new mongoose.Schema({
     {
         type: String,
     },
+    reports: 
+    {
+        type: [String],
+    },
+
+
     
 })
 

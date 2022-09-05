@@ -156,5 +156,56 @@ appl.get('/youComits', (req, res) => {
 
 
  
+appl.post('/AddReport',(req, res) => {
+
+  
+  var comitId= req.query.ComitId;
+  var CurrentUser= req.query.currentUser;
+ 
+  comit.findOne({ _id:comitId,reports: CurrentUser})
+.then(UserPost => {
+
+  if (!UserPost) 
+  {
+    comit.findOneAndUpdate({ _id:comitId },{ $push: { reports: CurrentUser }}).then(Comiitt => {
+
+       if(Comiitt.reports.length>5){
+        comit.findOneAndDelete({ _id:comitId }).then(Comiitt =>
+         {
+          return  res.json({NT:'done1' })
+        })
+
+       }
+       else{
+        return  res.json({NT:'done2' })
+       }
+
+    })
+    
+
+  }
+     else
+     {
+
+      return  res.json({NT:'done3' })
+
+     }
+
+})
+
+  
+
+
+
+     
+
+       
+
+
+
+})
+
+
+
 
 module.exports = appl;

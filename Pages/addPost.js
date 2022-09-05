@@ -135,7 +135,7 @@ appl.get('/myPosts', (req, res) => {
      userInfo.findOne({ _id: UserId })
     .then(Cuser => {
         
-    Post.find({$or:[{Section:Cuser.Section},{description:{$regex:Cuser.description}},{city:Cuser.city},{Section:Cuser.Section},{description:{$regex:Cuser.work}}] })
+    Post.find({$or:[{Section:Cuser.Section},{description:{$regex:Cuser.description}},{city:Cuser.city},{description:{$regex:Cuser.work}}] })
     .then(userPosts => {
  
        if (!userPosts) 

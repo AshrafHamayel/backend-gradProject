@@ -700,6 +700,31 @@ appl.get('/getFollow',(req, res) => {
 
 
 
+appl.post('/setNewPos',(req, res) => {
+  
+
+  var UserId= req.query.UserId;
+  var lat= req.query.LAT;
+  var long= req.query.LONG;
+
+  userInfo.findOneAndUpdate({ _id: UserId }, {latitude:lat,longitude:long},(err) => {
+    if (err) console.log('saveImage ---1 '+err);
+    else
+    {
+      return  res.json({
+        NT:'done'
+    })
+
+    
+
+    }
+  
+
+  })
+  
+
+});
+
 
 
 module.exports = appl;
